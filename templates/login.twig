@@ -4,31 +4,30 @@
 
 {% block content %}
 {{ card_begin("Log into CustoDesk") }}
-	{% if data.error %}
-	<p class="error">{{ data.error }}</p>
-	{% endif %}
-	<form action="/login" method="post" id="loginForm">
-		<table>
-			<tbody>
-				<tr>
-					<td><label for="username">Username:</label></td>
-					<td><input class="inputField" type="text" name="username" required=""></td>
-				</tr>
-				<tr>
-					<td><label for="password">Password:</label></td>
-					<td><input class="inputField" type="password" name="password" required=""></td>
-				</tr>
-				<tr>
-				</tr>
-				<tr>
-					<td></td>
-					<td>
-						<input type="submit" value="Login" class="formButton">
-					</td>
-				</tr>
-			</tbody>
-		</table>
-	</form>
-	<p>Don't have an account? <a href="/register">Create one!</a></p>
+	<center>
+		{% if data.error %}
+		<p class="error">{{ data.error }}</p>
+		{% endif %}
+		<form action="/login" method="post" id="loginForm">
+			<table>
+				<tbody>
+					<tr>
+						<td><label for="username">Username:</label></td>
+						<td><input class="inputField" type="text" name="username" required=""></td>
+					</tr>
+					<tr>
+						<td><label for="password">Password:</label></td>
+						<td><input class="inputField" type="password" name="password" required=""></td>
+					</tr>
+				</tbody>
+			</table>
+			<input type="checkbox" name="remember" id="remember">
+			<label for="remember">Remember me</label>
+			<br>
+			<input type="submit" value="Login" class="formButton">
+		</form>
+		<p style="margin-bottom:4px">Don't have an account? <a href="/register">Create one!</a></p>
+		<p style="margin-top:4px"><a href="/password_reset">Forgot your password?</a></p>
+	</center>
 {{ card_end() }}
 {% endblock %}
