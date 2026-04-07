@@ -3,7 +3,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>CustoDesk</title>
+        <title>CustoDesk{{ data.title ? " - " ~ data.title }}</title>
 		<link rel="shortcut icon" href="{{ custodesk.vfl.resolveImage("favicon") }}" type="image/png">
         <link rel="stylesheet" href="{{ custodesk.vfl.resolveCSS("core") }}">
 		{% block css %}{% endblock %}
@@ -16,7 +16,7 @@
 				<a href="">Methods</a>
 				<a href="/about">About</a>
 				<div id="accountActions">
-					<a href="">Create an account</a>
+					<a href="/register">Create an account</a>
 					<span>or</span>
 					<a href="/login">Log in</a>
 				</div>

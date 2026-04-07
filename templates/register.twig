@@ -1,0 +1,50 @@
+{% extends "core.twig" %}
+{% from "common/macros.twig" import card_begin %}
+{% from "common/macros.twig" import card_end %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ custodesk.vfl.resolveCSS("register") }}">
+{% endblock %}
+
+{% block content %}
+{{ card_begin("Create a CustoDesk account") }}
+    <form action="/register" method="post" id="registerForm">
+        <table>
+            <tbody>
+                <tr>
+                    <td colspan="2">
+                        Fields marked with <span class="required">*</span> are required.
+                    </td>
+                </tr>
+                <tr>
+                    <td class="left"><label for="username">Username<span class="required">*</span>:</label></td>
+                    <td><input type="text" name="username" required=""></td>
+                </tr>
+                <tr>
+                    <td class="left"><label for="password">Password<span class="required">*</span>:</label></td>
+                    <td><input type="password" name="password" required=""></td>
+                </tr>
+                <tr>
+                    <td class="left"><label for="confirm_password">Confirm password<span class="required">*</span>:</label></td>
+                    <td><input type="password" name="confirm_password" required=""></td>
+                </tr>
+                <tr>
+                    <td class="left">Remember me:</td>
+                    <td><input type="checkbox" name="remember" id="remember"></td>
+                </tr>
+                <tr>
+                    <td class="left">Captcha<span class="required">*</span>:</td>
+                    <td>
+                        <input type="checkbox" name="captcha" id="captcha">
+                        <label for="captcha">(temporary)</label>
+                    </td>
+                </tr>
+                <tr class="last">
+                    <td></td>
+                    <td><input type="submit" value="Register"></td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+{{ card_end() }}
+{% endblock %}

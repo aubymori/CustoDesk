@@ -7,6 +7,7 @@ use CustoDesk\TemplateUtilsDelegate;
 
 class PageController
 {
+    public string $title = "";
     public string $template = "404";
     protected object $data;
 
@@ -19,6 +20,7 @@ class PageController
             http_response_code(404);
         }
         
+        $this->data->title = $this->title;
         Controller::$twig->addGlobal("data", $this->data);
         Controller::$twig->addGlobal("custodesk", new TemplateUtilsDelegate());
         echo Controller::$twig->render($this->template . ".twig", []);

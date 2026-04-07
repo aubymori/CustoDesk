@@ -7,6 +7,7 @@ use CustoDesk\RequestMetadata;
 class AboutController extends PageController
 {
     public string $template = "about";
+    public string $title = "About";
 
     public function onGet(RequestMetadata $request): bool
     {

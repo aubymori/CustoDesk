@@ -1,0 +1,32 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.cardContent {
+    padding: 0;
+}
+
+.required {
+    color: #f00;
+    font-weight: 700;
+}
+
+tr {
+    height: 25px;
+    border-bottom: 1px solid #808080;
+
+    &.last {
+        border: 0;
+    }
+}
+
+td {
+    padding-left: 4px;
+
+    &.left {
+        background-color: #f0f0f0;
+        border-right: 1px solid #808080;
+        font-weight: 700;
+    }
+}

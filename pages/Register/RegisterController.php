@@ -1,13 +1,13 @@
 <?php
-namespace CustoDesk\Page\Login;
+namespace CustoDesk\Page\Register;
 
 use CustoDesk\Page\Common\PageWithPostController;
 use CustoDesk\RequestMetadata;
 
-class LoginController extends PageWithPostController
+class RegisterController extends PageWithPostController
 {
-    public string $template = "login";
-    public string $title = "Log in";
+    public string $template = "register";
+    public string $title = "Register";
 
     public function onGet(RequestMetadata $request): bool
     {
