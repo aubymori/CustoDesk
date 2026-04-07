@@ -10,6 +10,10 @@ class HomeController extends PageController
 
     public function onGet(RequestMetadata $request): bool
     {
+        $db = new \SQLite3("custodesk.db");
+        $exec = file_get_contents("include/init.sql");
+        $db->exec($exec);
+        $db->close();
         return true;
     }
 }
