@@ -12,13 +12,23 @@
 		<div id="headerArea">
 			<a id="headerLogo" href="/"></a>
 			<div id="linksBar">
-				<a href="/">Home</a>
-				<a href="">Methods</a>
-				<a href="/about">About</a>
+				<a href="/list/resources">Resources</a>
+				<a href="/list/tutorials">Tutorials</a>
+				<a href="/list/wallpapers">Wallpapers</a>
+				<a href="/list/screenshots">Screenshots</a>
 				<div id="accountActions">
-					<a href="/register">Create an account</a>
+					{% if true %}
+					<a href="/register">Register</a>
 					<span>or</span>
 					<a href="/login">Log in</a>
+					{% else %}
+					<a href="/user/1" id="accountLink" onclick="toggleMenu('accountMenu', event)">aubymori</a>
+					<div id="accountMenu" class="menu">
+						<a href="/user/1">Profile</a>
+						<a href="/new">Create post</a>
+						<a href="/logout">Log out</a>
+					</div>
+					{% endif %}
 				</div>
 			</div>
 		</div>

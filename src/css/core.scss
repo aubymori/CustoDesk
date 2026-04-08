@@ -26,6 +26,7 @@ a {
 
 .error {
 	color: #f00;
+	font-weight: 700;
 }
 
 /* Header styles */
@@ -59,6 +60,14 @@ a {
 	display: inline;
 	float: right;
 	margin-right: 5px;
+	text-align: right;
+}
+
+#accountLink::after {
+	content: "";
+	display: inline-block;
+	margin-left: 5px;
+	@include sprite("sprites", "account_menu_chevron");
 }
 
 /* Base content styles */
@@ -141,4 +150,25 @@ a {
 	margin-top: 10px;
 	font-size: 9px;
 	color: #404040;
+}
+
+.menu {
+	display: none;
+	background: #fff;
+	border: 1px solid #000;
+	
+	&, a {
+		color: #000 !important;
+		font-weight: 400 !important;
+		text-align: left !important;
+	}
+
+	&.open {
+		display: block;
+	}
+
+	a {
+		display: block;
+		margin: 5px;
+	}
 }

@@ -16,6 +16,11 @@
                         Fields marked with <span class="required">*</span> are required.
                     </td>
                 </tr>
+                {% if data.error %}
+                <tr>
+                    <td colspan="2"><span class="error">{{ data.error }}</span></td>
+                </tr>
+                {% endif %}
                 <tr>
                     <td class="left"><label for="username">Username<span class="required">*</span>:</label></td>
                     <td><input type="text" name="username" required=""></td>
