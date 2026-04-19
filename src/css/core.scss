@@ -34,6 +34,7 @@ input[type="password"],
 textarea {
 	background: #fff;
 	border: 1px solid #000;
+	padding: 2px 1px;
 	
 	&:focus-visible {
 		outline: 0;
