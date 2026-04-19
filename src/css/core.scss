@@ -29,6 +29,54 @@ a {
 	font-weight: 700;
 }
 
+input[type="text"],
+input[type="password"],
+textarea {
+	background: #fff;
+	border: 1px solid #000;
+	
+	&:focus-visible {
+		outline: 0;
+		border-color: #167ac6;
+	}
+}
+
+input[type="checkbox"] {
+	background: #fff;
+	border: 1px solid #000;
+	width: 13px !important;
+	height: 13px !important;
+	appearance: none;
+
+	&, & + label {
+		vertical-align: middle;
+	}
+
+	&:checked {
+		@include sprite("sprites", "check");
+	}
+
+	&:active {
+		background-color: #bbb;
+	}
+}
+
+input[type="button"],
+input[type="submit"],
+button {
+	background: #eee;
+	border: 1px solid #000;
+	padding: 2px 4px;
+
+	&:hover {
+		background: #ddd;
+
+		&:active {
+			background: #ccc;
+		}
+	}
+}
+
 /* Header styles */
 
 #headerArea {
@@ -81,12 +129,20 @@ a {
 }
 
 #leftCol {
-	width: 200px;
+	width: 230px;
 	margin-right: 10px;
+
+	.bigLeftCol & {
+		width: 590px;
+	}
 }
 
 #rightCol {
-	width: 590px;
+	width: 560px;
+
+	.bigLeftCol & {
+		width: 200px;
+	}
 }
 
 /* Card styles */

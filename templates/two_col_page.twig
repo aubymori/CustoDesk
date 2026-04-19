@@ -1,7 +1,7 @@
 {% extends "core.twig" %}
 
 {% block content %}
-<div id="twoColContainer">
+<div id="twoColContainer" class="{{ big_left_col ? "bigLeftCol" }}">
     <div id="leftCol">{% block left_col_content %}{% endblock %}</div>
     <div id="rightCol">{% block right_col_content %}{% endblock %}</div>
 </div>
