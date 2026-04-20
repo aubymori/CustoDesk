@@ -5,6 +5,6 @@ class Session
 {
     public static function isLoggedIn(): bool
     {
-        return true;
+        return false;
     }
 }

@@ -36,6 +36,14 @@
 			</div>
 		</div>
 
+		<div id="alerts">
+			{% for alert in data.alerts %}
+			<div class="alert {{ alert.type }}">
+				<div class="alert-text">{{ alert.text }}</div>
+			</div>
+			{% endfor %}
+		</div>
+
 		<div id="content">
 			{% block content %}{% endblock %}
 		</div>

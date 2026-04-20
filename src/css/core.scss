@@ -28,11 +28,6 @@ a {
 	}
 }
 
-.error {
-	color: #f00;
-	font-weight: 700;
-}
-
 input[type="text"],
 input[type="password"],
 textarea {
@@ -136,10 +131,6 @@ button {
 
 /* Base content styles */
 
-#content {
-	margin-top: 20px;
-}
-
 #leftCol, #rightCol {
 	display: inline-block;
 	vertical-align: top;
@@ -160,6 +151,37 @@ button {
 	.bigLeftCol & {
 		width: 200px;
 	}
+}
+
+#alerts {
+	padding: 10px 0;
+}
+
+.alert {
+	text-align: center;
+	background: #000;
+	color: #fff;
+	border: 1px solid #000;
+	font-weight: 700;
+	margin-bottom: 6px;
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+
+	&.alert-error {
+		background: #cc181e;
+	}
+
+	&.alert-warning {
+		background: #f5d562;
+		color: #000;
+	}
+}
+
+.alert-text {
+	border: 1px solid #fff;
+	padding: 4px;
 }
 
 /* Card styles */

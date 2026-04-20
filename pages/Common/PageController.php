@@ -11,9 +11,21 @@ class PageController
     public string $template = "404";
     protected object $data;
 
+    protected function redirect(string $url): void
+    {
+        header("Location: " . $url);
+        exit();
+    }
+
+    protected function addAlert(string $type, string $text): void
+    {
+        $this->data->alerts[] = new Alert($type, $text);
+    }
+
     public function get(RequestMetadata $request): void
     {
         $this->data = (object)[];
+        $this->data->alerts = [];
         if (!$this->onGet($request))
         {
             $this->template = "404";

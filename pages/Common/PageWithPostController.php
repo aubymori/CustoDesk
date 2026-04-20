@@ -3,7 +3,7 @@ namespace CustoDesk\Page\Common;
 
 use CustoDesk\Controller;
 use CustoDesk\RequestMetadata;
-use CustoDesk\TemplateUtilsDelegate;
+use CustoDesk\TemplateUtils\TemplateUtilsDelegate;
 
 class PageWithPostController extends PageController
 {

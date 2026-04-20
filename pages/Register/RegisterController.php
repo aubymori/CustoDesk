@@ -1,8 +1,10 @@
 <?php
 namespace CustoDesk\Page\Register;
 
+use CustoDesk\Page\Common\AlertType;
 use CustoDesk\Page\Common\PageWithPostController;
 use CustoDesk\RequestMetadata;
+use CustoDesk\Session;
 
 class RegisterController extends PageWithPostController
 {
@@ -11,12 +13,16 @@ class RegisterController extends PageWithPostController
 
     public function onGet(RequestMetadata $request): bool
     {
+        if (Session::isLoggedIn())
+        {
+            $this->redirect("/");
+        }
         return true;
     }
 
     public function onPost(RequestMetadata $request): bool
     {
-        $this->data->error = "Not implemented";
+        $this->addAlert(AlertType::ERROR, "Not implemented");
         return true;
     }
 }

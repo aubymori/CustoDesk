@@ -5,15 +5,12 @@
 {% block content %}
 {{ card_begin("Log in to CustoDesk") }}
 	<center>
-		{% if data.error %}
-		<p class="error">{{ data.error }}</p>
-		{% endif %}
 		<form action="/login" method="post" id="loginForm">
 			<table>
 				<tbody>
 					<tr>
 						<td><label for="username">Username:</label></td>
-						<td><input type="text" name="username" required=""></td>
+						<td><input type="text" name="username" value="{{ data.username }}" required=""></td>
 					</tr>
 					<tr>
 						<td><label for="password">Password:</label></td>
