@@ -1,0 +1,38 @@
+{% macro card_begin(title) %}
+<div class="card">
+    <div class="cardHeader">{{ title }}</div>
+    <div class="cardContent">
+{% endmacro %}
+
+{% macro card_end() %}
+    </div>
+</div>
+{% endmacro %}
+
+{% macro post(data) %}
+<div class="post clearfix">
+    <a href="/post/1" class="postThumb">
+        <img src="{{ custodesk.vfl.resolveImage("post-thumb") }}">
+    </a>
+    <div class="postDetails">
+        <div class="postType">Wallpaper</div>
+        <a href="/post/1" class="postTitle">Example post</a>
+        <div class="postAuthor">By: <a href="/user/1">aubymori</a></div>
+        <div class="postTags">
+            Tags:
+            <a href="/tag/hi">hi</a>,
+            <a href="/tag/bye">bye</a>
+        </div>
+        <div class="postTime">Submitted: 1/1/1970 12:00 AM</div>
+        <div class="postEditTime">Updated: 1/1/1970 12:00 AM</div>
+        <div class="postRating">
+            <div class="star full"></div>
+            <div class="star full"></div>
+            <div class="star half"></div>
+            <div class="star empty"></div>
+            <div class="star empty"></div>
+            <span>5 ratings</span>
+        </div>
+    </div>
+</div>
+{% endmacro %}

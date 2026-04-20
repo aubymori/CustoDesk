@@ -1,15 +1,108 @@
 {% extends "two_col_page.twig" %}
-{% from "common/macros.twig" import card_begin %}
-{% from "common/macros.twig" import card_end %}
+{% import "macros/core.twig" as core %}
+{% from "macros/common.twig" import card_begin %}
+{% from "macros/common.twig" import card_end %}
+{% from "macros/common.twig" import post %}
+
+{% block css %}
+{{ core.css("home") }}
+{% endblock %}
 
 {% block left_col_content %}
-{{ card_begin("Categories") }}
-	Some text
+{% if custodesk.isLoggedIn() %}
+{{ card_begin("You are logged in as") }}
+    <div class="user clearfix">
+        <a href="/user/1" class="userIcon">
+            <img src="{{ custodesk.vfl.resolveImage("user-icon") }}">
+        </a>
+        <div class="userDetails">
+            <a href="/users/1" class="userName">aubymori</a>
+            <div class="userRole">Member</div>
+            <div class="userTime">Joined 1/1/1970</div>
+            <div class="userPosts">10 fans</div>
+        </div>
+    </div>
+{{ card_end() }}
+{% else %}
+{{ card_begin("Log in") }}
+    <form action="/login" method="post" id="loginForm">
+        <table>
+            <tbody>
+                <tr>
+                    <td><input type="text" name="username" required="" placeholder="Username"></td>
+                </tr>
+                <tr>
+                    <td><input type="password" name="password" required="" placeholder="Password"></td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" name="remember" id="remember">
+			            <label for="remember">Remember me</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td><input type="submit" value="Log in"></td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+{{ card_end() }}
+{% endif %}
+
+{{ card_begin("Search") }}
+    <form action="/search" id="searchForm">
+        <table>
+            <tbody>
+                <tr>
+                    <td style="width: 100%"><input type="text" name="q" id="searchQuery"></td>
+                    <td><input type="submit" value="Go"></td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+{{ card_end() }}
+
+{{ card_begin("News") }}
+    <div id="newsTitle">Welcome to CustoDesk!</div>
+    <div id="newsAuthor">By: <a href="/user/1">aubymori</a></div>
+    <div id="newsTime">Posted: 1/1/1970 12:00 AM</div>
+    <div id="newsText">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum maximus scelerisque nulla, egestas pretium nisl ornare non. Quisque sodales dignissim eros...
+    </div>
+    <a href="/post/1" id="newsLink">Read more &gt;&gt;</a>
+{{ card_end() }}
+
+{{ card_begin("Statistics") }}
+    <b>100</b> users registered<br>
+    <b>10</b> users registered today<br>
+    <b>1000</b> posts created<br>
+    <b>1</b> post created today
+    <br><br>
+    {% set now = custodesk.time.now() %}
+    It is currently <b>{{ custodesk.time.formatTime(now) }}</b> on <b>{{ custodesk.time.formatDate(now) }}</b>.
 {{ card_end() }}
 {% endblock %}
 
 {% block right_col_content %}
+{% if not custodesk.isLoggedIn() %}
 {{ card_begin("Home") }}
-    Welcome to <b>CustoDesk</b>!
+    <p id="homeText">
+        <b>CustoDesk</b> is a global community dedicated to desktop customization. Users can share resources
+        and tutorials for desktop customization as well as screenshots of their customized desktops.
+    </p>
+    <span id="bigText">
+        <a href="/register">Create an account</a> now!
+    </span>
+{{ card_end() }}
+{% endif %}
+
+{{ card_begin("Popular Posts of Today") }}
+    {{ post() }}
+    {{ post() }}
+{{ card_end() }}
+
+{{ card_begin("Recent Posts") }}
+    {{ post() }}
+    {{ post() }}
 {{ card_end() }}
 {% endblock %}

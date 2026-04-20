@@ -1,11 +1,14 @@
 {% apply spaceless %}
+{% import "macros/core.twig" as core %}
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>CustoDesk{{ data.title ? " - " ~ data.title }}</title>
+        <title>CustoDesk{{ data.title ? ": " ~ data.title }}</title>
 		<link rel="shortcut icon" href="{{ custodesk.vfl.resolveImage("favicon") }}" type="image/png">
-        <link rel="stylesheet" href="{{ custodesk.vfl.resolveCSS("core") }}">
+		{{ core.js("core") }}
+		{% block js %}{% endblock %}
+        {{ core.css("core") }}
 		{% block css %}{% endblock %}
     </head>
     <body>
@@ -17,17 +20,17 @@
 				<a href="/search?type=post&amp;category=wallpaper">Wallpapers</a>
 				<a href="/search?type=post&amp;category=screenshot">Screenshots</a>
 				<div id="accountActions">
-					{% if true %}
-					<a href="/register">Register</a>
-					<span>or</span>
-					<a href="/login">Log in</a>
-					{% else %}
+					{% if custodesk.isLoggedIn() %}
 					<a href="/user/1" id="accountLink" onclick="toggleMenu('accountMenu', event)">aubymori</a>
 					<div id="accountMenu" class="menu">
 						<a href="/user/1">Profile</a>
 						<a href="/new">Create post</a>
 						<a href="/logout">Log out</a>
 					</div>
+					{% else %}
+					<a href="/register">Register</a>
+					<span>or</span>
+					<a href="/login">Log in</a>
 					{% endif %}
 				</div>
 			</div>
@@ -38,10 +41,8 @@
 		</div>
 
 		<div id="footer">
-			© 2026 CustoDesk. All Rights Reserved.
+			© 2026 CustoDesk. All rights reserved.
 		</div>
-		<script src="{{custodesk.vfl.resolveJS("core") }}"> </script>
-		{% block js %}{% endblock %}
     </body>
 </html>
 {% endapply %}

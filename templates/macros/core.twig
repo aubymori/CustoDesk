@@ -1,0 +1,7 @@
+{% macro css(name) %}
+<link rel="stylesheet" href="{{ custodesk.vfl.resolveCSS(name) }}">
+{% endmacro %}
+
+{% macro js(name) %}
+<script src="{{custodesk.vfl.resolveJS(name) }}"></script>
+{% endmacro %}

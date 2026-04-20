@@ -1,0 +1,65 @@
+@import "images";
+
+.postThumb {
+    float: left;
+    border: 1px dashed #000;
+    margin-right: 6px;
+
+    img {
+        width: 140px;
+        height: 105px;
+    }
+}
+
+.post {
+    color: #999;
+    line-height: 1.2;
+    padding: 5px;
+    border-top: 1px solid #ccc;
+    margin: 0 -5px;
+
+    &:first-child {
+        padding-top: 0;
+        border-top: 0;
+    }
+
+    &:last-child {
+        padding-bottom: 0;
+    }
+}
+
+.postTitle {
+    font-size: 14px;
+    font-weight: 700;
+    color: #000;
+
+    &:hover {
+        color: #167ac6;
+    }
+}
+
+.star {
+    display: inline-block;
+    vertical-align: middle;
+
+    &.empty {
+        @include sprite("sprites", "star_empty");
+    }
+    
+    &.half {
+        @include sprite("sprites", "star_half");
+    }
+    
+    &.full {
+        @include sprite("sprites", "star_full");
+    }
+}
+
+.postRating {
+    margin-top: 2px;
+
+    & > span {
+        vertical-align: middle;
+        margin-left: 4px;
+    }
+}

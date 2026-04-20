@@ -1,0 +1,59 @@
+#loginForm {
+    margin-bottom: 0;
+
+    & > table {
+        border-spacing: 0 2px;
+        margin-top: -2px;
+        width: 100%;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
+
+#remember {
+    margin-left: 0;
+}
+
+#searchForm {
+    margin-bottom: 0;
+
+    table {
+        border-spacing: 5px 0;
+        margin: 0 -5px;
+    }
+
+    td {
+        padding: 0;
+    }
+}
+
+#searchQuery {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#homeText {
+    margin-bottom: 6px;
+}
+
+#bigText {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+#newsTitle {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+#newsAuthor, #newsTime {
+    color: #999;
+}
+
+#newsText {
+    margin: 4px 0;
+}

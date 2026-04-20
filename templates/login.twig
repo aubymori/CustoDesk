@@ -1,6 +1,6 @@
 {% extends "core.twig" %}
-{% from "common/macros.twig" import card_begin %}
-{% from "common/macros.twig" import card_end %}
+{% from "macros/common.twig" import card_begin %}
+{% from "macros/common.twig" import card_end %}
 
 {% block content %}
 {{ card_begin("Log in to CustoDesk") }}
@@ -13,18 +13,18 @@
 				<tbody>
 					<tr>
 						<td><label for="username">Username:</label></td>
-						<td><input class="inputField" type="text" name="username" required=""></td>
+						<td><input type="text" name="username" required=""></td>
 					</tr>
 					<tr>
 						<td><label for="password">Password:</label></td>
-						<td><input class="inputField" type="password" name="password" required=""></td>
+						<td><input type="password" name="password" required=""></td>
 					</tr>
 				</tbody>
 			</table>
 			<input type="checkbox" name="remember" id="remember">
 			<label for="remember">Remember me</label>
 			<br>
-			<input type="submit" value="Login" class="formButton">
+			<input type="submit" value="Log in">
 		</form>
 		<p style="margin-bottom:4px">Don't have an account? <a href="/register">Create one!</a></p>
 		<p style="margin-top:4px"><a href="/password_reset">Forgot your password?</a></p>

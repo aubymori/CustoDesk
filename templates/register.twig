@@ -1,9 +1,10 @@
 {% extends "core.twig" %}
-{% from "common/macros.twig" import card_begin %}
-{% from "common/macros.twig" import card_end %}
+{% import "macros/core.twig" as core %}
+{% from "macros/common.twig" import card_begin %}
+{% from "macros/common.twig" import card_end %}
 
 {% block css %}
-<link rel="stylesheet" href="{{ custodesk.vfl.resolveCSS("register") }}">
+{{ core.css("register") }}
 {% endblock %}
 
 {% block content %}
