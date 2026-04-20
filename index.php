@@ -1,12 +1,12 @@
 <?php
 namespace CustoDesk\Page;
+$GLOBALS["start_time"] = microtime(true);
 
 require "vendor/autoload.php";
 require "include/autoload.php";
 
 use CustoDesk\Controller;
 
-$GLOBALS["start_time"] = microtime(true);
 
 Controller::route([
     "get" => [
