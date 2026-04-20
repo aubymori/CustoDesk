@@ -32,7 +32,14 @@ class RateLimit
         $stmt->execute();
     }
 
-    private static function getLastTime(string $ip): string
+    private static function getExpireTime(string $ip): int
+    {
+        $stmt = DB::prepare("SELECT expire_at FROM rate_limits WHERE ip = :ip");
+        $stmt->bindValue(":ip", $ip);
+        return $stmt->execute()->fetchArray(SQLITE3_ASSOC)["expire_at"];
+    }
+
+    private static function getLastTime(string $ip): int
     {
         $stmt = DB::prepare("SELECT last_time FROM rate_limits WHERE ip = :ip");
         $stmt->bindValue(":ip", $ip);
@@ -58,10 +65,12 @@ class RateLimit
         if (!ServerConfig::shouldRateLimit())
             return true;
 
-        $time = TimeUtils::now();
-        $expire = $time + self::PERIOD;
         $ip = $_SERVER["REMOTE_ADDR"];
-        self::purge($time);
+        $time = TimeUtils::now();
+        if (self::getExpireTime($ip) <= $time)
+            self::purge($time);
+
+        $expire = $time + self::PERIOD;
 
         $stmt = DB::prepare("SELECT * FROM rate_limits WHERE ip=:ip");
         $stmt->bindValue(":ip", $ip);

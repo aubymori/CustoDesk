@@ -6,14 +6,14 @@ CREATE TABLE rate_limits (
 );
 
 CREATE TABLE users (
-    id INTEGER PRIMARY KEY,
+    id INTEGER PRIMARY KEY NOT NULL,
     username CHAR(20),
     password TEXT,
     created_at INTEGER
 );
 
 CREATE TABLE sessions(
-    id INTEGER PRIMARY KEY,
+    id INTEGER PRIMARY KEY NOT NULL,
     secret TEXT,
     user_id INTEGER,
     created_at INTEGER,
