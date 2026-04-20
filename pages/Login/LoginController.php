@@ -24,6 +24,7 @@ class LoginController extends PageWithPostController
     {
         $this->addAlert(AlertType::ERROR, "Not implemented");
         $this->data->username = @$_POST["username"] ?? "";
+        $this->data->remember = @$_POST["remember"] == "on";
         return true;
     }
 }
