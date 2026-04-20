@@ -1,6 +1,7 @@
 <?php
 namespace CustoDesk\TemplateUtils;
 
+use CustoDesk\ServerConfig;
 use CustoDesk\Session;
 
 class TemplateUtilsDelegate
@@ -14,6 +15,7 @@ class TemplateUtilsDelegate
         $this->time = new TimeUtilsDelegate();
     }
 
+    /* TODO(aubymori): Remove and replace with a delegate for the Session class */
     public function isLoggedIn(): bool
     {
         return Session::isLoggedIn();
@@ -30,5 +32,10 @@ class TemplateUtilsDelegate
         {
             return number_format($diff, 3);
         }
+    }
+
+    public function isDebug(): bool
+    {
+        return ServerConfig::isDebug();
     }
 }

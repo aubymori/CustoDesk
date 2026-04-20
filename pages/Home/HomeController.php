@@ -11,7 +11,7 @@ class HomeController extends PageController
 
     public function onGet(RequestMetadata $request): bool
     {
-        //DB::exec("DROP TABLE users");
+        throw new \Error("Hi");
         return true;
     }
 }

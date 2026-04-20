@@ -1,4 +1,7 @@
 {
     /* Salt string to use for passwords */
-    "salt": ""
+    "salt": "",
+
+    /* Whether the server is running in a debug environment */
+    "debug": false
 }

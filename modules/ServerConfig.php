@@ -4,6 +4,7 @@ namespace CustoDesk;
 class ServerConfig
 {
     private static string $salt;
+    private static bool $debug;
 
     private static function error(string $err): void
     {
@@ -32,10 +33,16 @@ class ServerConfig
         }
 
         self::$salt = (string)$json->salt;
+        self::$debug = @$json->debug ?? false;
     }
 
     public static function getSalt(): string
     {
         return self::$salt;
+    }
+
+    public static function isDebug(): bool
+    {
+        return self::$debug;
     }
 }

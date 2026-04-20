@@ -1,0 +1,20 @@
+{% extends "core.twig" %}
+{% from "macros/common.twig" import card_begin %}
+{% from "macros/common.twig" import card_end %}
+
+{% block content %}
+
+{{ card_begin("Internal Server Error") }}
+The server was unable to process your request.
+{% if custodesk.isDebug() %}
+<br>
+<b>Details:</b><br>
+<b>Type:</b> {{ data.type }}<br>
+<b>String:</b> {{ data.string }}<br>
+<b>File:</b> {{ data.file }}<br>
+<b>Line:</b> {{ data.line }}<br>
+{% endif %}
+<br>
+<a href="/">Return to homepage</a>
+{{ card_end() }}
+{% endblock %}
