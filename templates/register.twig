@@ -18,27 +18,45 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="left"><label for="username">Username<span class="required">*</span>:</label></td>
-                    <td><input type="text" name="username" required="" value="{{ data.username }}"></td>
-                </tr>
-                <tr>
-                    <td class="left"><label for="password">Password<span class="required">*</span>:</label></td>
-                    <td><input type="password" name="password" required=""></td>
-                </tr>
-                <tr>
-                    <td class="left"><label for="confirm_password">Confirm password<span class="required">*</span>:</label></td>
-                    <td><input type="password" name="confirm_password" required=""></td>
-                </tr>
-                <tr>
-                    <td class="left">Remember me:</td>
-                    <td><input type="checkbox" name="remember" id="remember" {{ data.remember ? "checked" }}></td>
-                </tr>
-                <tr>
-                    <td class="left">Captcha<span class="required">*</span>:</td>
-                    <td>
-                        <input type="checkbox" name="captcha" id="captcha">
-                        <label for="captcha">(temporary)</label>
+                    <td class="left">
+                        <label for="username">Username<span class="required">*</span>:</label><br>
+                        <span class="description">
+                            Must be at least 3 characters and at most 20 characters.
+                            Can contain alphanumeric characters (A-Z, 0-9) as well as underscores (_).
+                        </span>
                     </td>
+                    <td class="top"><input type="text" name="username" {#required=""#} value="{{ data.username }}"
+                                           {#minlength="3" maxlength="20" pattern="^[a-zA-Z0-9]+$"#}></td>
+                </tr>
+                <tr>
+                    <td class="left">
+                        <label for="password">Password<span class="required">*</span>:</label><br>
+                        <span class="description">
+                            Must be at least 8 characters and at most 100 characters.
+                        </span>
+                    </td>
+                    <td><input type="password" name="password" {#required=""
+                               minlength="8" maxlength="100"#}></td>
+                </tr>
+                <tr>
+                    <td class="left">
+                        <label for="confirm_password">Confirm password<span class="required">*</span>:</label><br>
+                        <span class="description">
+                            Type your password again to confirm it.
+                        </span>
+                    </td>
+                    <td><input type="password" name="confirm_password" {#required=""
+                               minlength="8" maxlength="100"#}></td>
+                </tr>
+                <tr>
+                    <td class="left">
+                        Remember me:<br>
+                        <span class="description">
+                            Stay logged in after closing your browser. This only applies to the session that is created
+                            immediately after logging in.
+                        </span>
+                    </td>
+                    <td><input type="checkbox" name="remember" id="remember" {{ data.remember ? "checked" }}></td>
                 </tr>
                 <tr class="last">
                     <td></td>

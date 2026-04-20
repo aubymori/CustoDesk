@@ -26,13 +26,22 @@ tr {
 }
 
 td {
-    padding-left: 4px;
+    padding: 6px 4px;
+
+    &.top {
+        vertical-align: top;
+    }
 
     &.left {
         background-color: #f0f0f0;
         border-right: 1px solid #808080;
         font-weight: 700;
+        width: 50%;
     }
+}
+
+.description {
+    font-weight: normal;
 }
 
 input[type="checkbox"] {

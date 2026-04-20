@@ -48,7 +48,7 @@ class PageController
         Controller::$twig->addGlobal("data", $this->data);
         Controller::$twig->addGlobal("custodesk", new TemplateUtilsDelegate());
         echo Controller::$twig->render($this->template . ".twig", []);
-        exit();
+        //exit();
     }
 
     public function onGet(RequestMetadata $request): bool
