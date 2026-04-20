@@ -19,7 +19,7 @@
                 </tr>
                 <tr>
                     <td class="left"><label for="username">Username<span class="required">*</span>:</label></td>
-                    <td><input type="text" name="username" required=""></td>
+                    <td><input type="text" name="username" required="" value="{{ data.username }}"></td>
                 </tr>
                 <tr>
                     <td class="left"><label for="password">Password<span class="required">*</span>:</label></td>
@@ -31,7 +31,7 @@
                 </tr>
                 <tr>
                     <td class="left">Remember me:</td>
-                    <td><input type="checkbox" name="remember" id="remember"></td>
+                    <td><input type="checkbox" name="remember" id="remember" {{ data.remember ? "checked" }}></td>
                 </tr>
                 <tr>
                     <td class="left">Captcha<span class="required">*</span>:</td>

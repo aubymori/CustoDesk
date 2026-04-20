@@ -23,6 +23,8 @@ class RegisterController extends PageWithPostController
     public function onPost(RequestMetadata $request): bool
     {
         $this->addAlert(AlertType::ERROR, "Not implemented");
+        $this->data->username = @$_POST["username"] ?? "";
+        $this->data->remember = @$_POST["remember"] == "on";
         return true;
     }
 }
