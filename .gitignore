@@ -3,6 +3,7 @@
 /src/build_tools/node_modules/
 /src/css/_imgmap.scss
 /s/
+/logs/
 /vfl.json
 /config.json
 *.db

@@ -1,14 +1,17 @@
 <?php
 namespace CustoDesk\Page;
+error_reporting(0);
 $GLOBALS["start_time"] = microtime(true);
 
 require "vendor/autoload.php";
 require "include/autoload.php";
 
 use CustoDesk\Controller;
+use CustoDesk\DB;
 use CustoDesk\ServerConfig;
 use CustoDesk\ErrorHandler;
 
+DB::init();
 ServerConfig::init();
 ErrorHandler::init();
 

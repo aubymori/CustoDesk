@@ -11,7 +11,7 @@ class DB
     private const INIT_FILE = "include/init.sql";
     private const DB_FILE   = "custodesk.db";
 
-    public static function __initStatic(): void
+    public static function init(): void
     {
         $shouldInit = !file_exists(self::DB_FILE);
         self::$db = new SQLite3(self::DB_FILE);

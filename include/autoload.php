@@ -6,6 +6,8 @@ use Exception;
 // Functions cannot be autoloaded, so load them manually.
 require "include/functions/rootpath.php";
 
+use function CustoDesk\rootpath;
+
 class Autoloader
 {
     public const autoload = self::class . "::autoload";
@@ -41,7 +43,7 @@ class Autoloader
 
     static function tryImportClass(string $path, string $class): void
     {
-        @$status = include $path;
+        @$status = include rootpath($path);
 
         if (true == $status)
         {

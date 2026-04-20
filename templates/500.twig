@@ -6,13 +6,12 @@
 
 {{ card_begin("Internal Server Error") }}
 The server was unable to process your request.
+<br><br>
 {% if custodesk.isDebug() %}
-<br>
 <b>Details:</b><br>
-<b>Type:</b> {{ data.type }}<br>
-<b>String:</b> {{ data.string }}<br>
-<b>File:</b> {{ data.file }}<br>
-<b>Line:</b> {{ data.line }}<br>
+<pre>{{ data.message }}</pre>
+{% else %}
+Please give the following failure ID to a server administrator: <b>{{ data.failureId }}</b><br>
 {% endif %}
 <br>
 <a href="/">Return to homepage</a>

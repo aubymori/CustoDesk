@@ -2,6 +2,7 @@
 namespace CustoDesk\Page\Common;
 
 use CustoDesk\Controller;
+use CustoDesk\ErrorHandler;
 use CustoDesk\RequestMetadata;
 use CustoDesk\TemplateUtils\TemplateUtilsDelegate;
 
@@ -33,6 +34,7 @@ class PageController
         }
         
         $this->data->title = $this->title;
+        $this->data->errors = ErrorHandler::$errors;
         Controller::$twig->addGlobal("data", $this->data);
         Controller::$twig->addGlobal("custodesk", new TemplateUtilsDelegate());
         echo Controller::$twig->render($this->template . ".twig", []);

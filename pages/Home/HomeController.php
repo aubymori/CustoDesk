@@ -11,7 +11,8 @@ class HomeController extends PageController
 
     public function onGet(RequestMetadata $request): bool
     {
-        throw new \Error("Hi");
+        trigger_error("Hi", E_USER_WARNING);
+        //throw new \Error("Hi");
         return true;
     }
 }

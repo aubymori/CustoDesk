@@ -42,6 +42,14 @@
 				<div class="alert-text">{{ alert.text }}</div>
 			</div>
 			{% endfor %}
+			{% for error in data.errors %}
+			<div class="alert {{ error.alertType }}" style="font-weight: 400; text-align: left">
+				<div class="alert-text">
+					<b>{{ error.typeStr }}</b>: {{ error.message }}<br>
+					In {{ error.file }}:{{ error.line }}
+				</div>
+			</div>
+			{% endfor %}
 		</div>
 
 		<div id="content">
@@ -51,7 +59,6 @@
 		<div id="footer">
 			© 2026 CustoDesk. All rights reserved.<br>
 			Page rendered in {{ custodesk.getRenderTime() }} seconds
-		</div>
     </body>
 </html>
 {% endapply %}
