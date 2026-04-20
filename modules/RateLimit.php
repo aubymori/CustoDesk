@@ -36,7 +36,7 @@ class RateLimit
     {
         $stmt = DB::prepare("SELECT expire_at FROM rate_limits WHERE ip = :ip");
         $stmt->bindValue(":ip", $ip);
-        return $stmt->execute()->fetchArray(SQLITE3_ASSOC)["expire_at"];
+        return @$stmt->execute()->fetchArray(SQLITE3_ASSOC)["expire_at"] ?? 0;
     }
 
     private static function getLastTime(string $ip): int
