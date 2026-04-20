@@ -1,3 +1,10 @@
+CREATE TABLE rate_limits (
+    ip TEXT,
+    last_time INTEGER,
+    expire_at INTEGER,
+    allowance INTEGER
+);
+
 CREATE TABLE users (
     id INTEGER PRIMARY KEY,
     username CHAR(20),

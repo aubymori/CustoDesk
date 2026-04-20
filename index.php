@@ -10,6 +10,7 @@ use CustoDesk\Controller;
 use CustoDesk\DB;
 use CustoDesk\ServerConfig;
 use CustoDesk\ErrorHandler;
+use CustoDesk\RateLimit;
 
 DB::init();
 ServerConfig::init();

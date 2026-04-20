@@ -2,6 +2,8 @@
 namespace CustoDesk\Page\Common;
 
 use CustoDesk\Controller;
+use CustoDesk\ErrorHandler;
+use CustoDesk\RateLimit;
 use CustoDesk\RequestMetadata;
 use CustoDesk\TemplateUtils\TemplateUtilsDelegate;
 
@@ -13,12 +15,24 @@ class PageWithPostController extends PageController
     public function post(RequestMetadata $request): void
     {
         $this->data = (object)[];
-        if (!$this->onPost($request))
+        $this->data->alerts = [];
+        if (RateLimit::check())
         {
-            $this->template = "404";
-            http_response_code(404);
+            if (!$this->onPost($request))
+            {
+                $this->template = "404";
+                http_response_code(404);
+            }
+            $this->data->title = $this->title;
+        }
+        else
+        {
+            http_response_code(429);
+            $this->template = "rate_limit";
+            $this->data->title = "Too Many Requests";
         }
         
+        $this->data->errors = ErrorHandler::$errors;
         Controller::$twig->addGlobal("data", $this->data);
         Controller::$twig->addGlobal("custodesk", new TemplateUtilsDelegate());
         echo Controller::$twig->render($this->template . ".twig", []);

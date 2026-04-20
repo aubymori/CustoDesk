@@ -154,7 +154,7 @@ class Controller
      * @param string $method that now finally gets used by the module!
      * @return mixed|void
      */
-    protected static function invokeHandlerForMatch(
+    public static function invokeHandlerForMatch(
         string $pointer, 
         string $method
     )

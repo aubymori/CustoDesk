@@ -28,7 +28,7 @@ class DB
         return self::$db->exec($query);
     }
 
-    public static function prepare(string $query): SQLite3Stmt
+    public static function prepare(string $query): SQLite3Stmt|false
     {
         return self::$db->prepare($query);
     }

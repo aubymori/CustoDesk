@@ -1,0 +1,10 @@
+{% extends "core.twig" %}
+{% from "macros/common.twig" import card_begin %}
+{% from "macros/common.twig" import card_end %}
+
+{% block content %}
+
+{{ card_begin("Too Many Requests") }}
+You're doing too many actions in a short timeframe. Please wait, and try again.
+{{ card_end() }}
+{% endblock %}
