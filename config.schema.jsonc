@@ -1,0 +1,4 @@
+{
+    /* Salt string to use for passwords */
+    "salt": ""
+}
