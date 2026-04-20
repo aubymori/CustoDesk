@@ -3,5 +3,9 @@
     "salt": "",
 
     /* Whether the server is running in a debug environment */
-    "debug": false
+    "debug": false,
+
+    /* If debugging is enabled, enable this to enable the rate limiter
+       for debugging purposes. */
+    "debugRateLimit": false
 }

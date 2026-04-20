@@ -55,6 +55,9 @@ class RateLimit
 
     public static function check(): bool
     {
+        if (!ServerConfig::shouldRateLimit())
+            return true;
+
         $time = TimeUtils::now();
         $expire = $time + self::PERIOD;
         $ip = $_SERVER["REMOTE_ADDR"];

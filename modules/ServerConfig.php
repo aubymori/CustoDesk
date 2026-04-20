@@ -5,6 +5,7 @@ class ServerConfig
 {
     private static string $salt;
     private static bool $debug;
+    private static bool $rateLimit;
 
     private static function error(string $err): void
     {
@@ -34,6 +35,14 @@ class ServerConfig
 
         self::$salt = (string)$json->salt;
         self::$debug = @$json->debug ?? false;
+        if (self::$debug)
+        {
+            self::$rateLimit = @$json->debugRateLimit ?? false;
+        }
+        else
+        {
+            self::$rateLimit = true;
+        }
     }
 
     public static function getSalt(): string
@@ -44,5 +53,10 @@ class ServerConfig
     public static function isDebug(): bool
     {
         return self::$debug;
+    }
+
+    public static function shouldRateLimit(): bool
+    {
+        return self::$rateLimit;
     }
 }
