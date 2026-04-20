@@ -18,4 +18,17 @@ class TemplateUtilsDelegate
     {
         return Session::isLoggedIn();
     }
+
+    public function getRenderTime(): string
+    {
+        $diff = microtime(true) - $GLOBALS["start_time"];
+        if ($diff < 0.001)
+        {
+            return "less than 0.001";
+        }
+        else
+        {
+            return number_format($diff, 3);
+        }
+    }
 }

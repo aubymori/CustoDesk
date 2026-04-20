@@ -6,6 +6,8 @@ require "include/autoload.php";
 
 use CustoDesk\Controller;
 
+$GLOBALS["start_time"] = microtime(true);
+
 Controller::route([
     "get" => [
         "/" => Home\HomeController::class,
