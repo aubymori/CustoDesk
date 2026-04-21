@@ -12,7 +12,10 @@ function build()
                     }))
                     .pipe(GulpBabel({
                         presets: [
-                            "@babel/preset-env"
+                            [ "@babel/preset-env", {
+                                useBuiltIns: "entry",
+                                corejs: "3.22"
+                            } ]
                         ],
                         targets: "firefox 3",
                         minified: true,
