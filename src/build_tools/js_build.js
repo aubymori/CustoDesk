@@ -1,6 +1,6 @@
 const gulp                   = require("gulp");
 const GulpPreprocess         = require("gulp-preprocess");
-const GulpTerser             = require("gulp-terser");
+const GulpBabel              = require("gulp-babel");
 const path                   = require("path");
 const vfl                    = require("./vfl");
 
@@ -10,10 +10,12 @@ function build()
                     .pipe(GulpPreprocess({
                         includeBase: path.resolve(path.dirname(__filename), "../js/")
                     }))
-                    .pipe(GulpTerser({
-                        ecma: 3,
-                        compress: true,
-                        mangle: true,
+                    .pipe(GulpBabel({
+                        presets: [
+                            "@babel/preset-env"
+                        ],
+                        targets: "firefox 3",
+                        minified: true,
                     }))
                     .pipe(vfl.gulp("s/jsbin"))
                     .pipe(gulp.dest("../../s/jsbin/"));
