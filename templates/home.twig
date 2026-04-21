@@ -29,10 +29,20 @@
         <table>
             <tbody>
                 <tr>
-                    <td><input type="text" name="username" required="" placeholder="Username"></td>
+                    <td>
+                        <label for="username">Username:</label>
+                    </td>
                 </tr>
                 <tr>
-                    <td><input type="password" name="password" required="" placeholder="Password"></td>
+                    <td><input type="text" name="username" required="" minlength="3" maxlength="20"></td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="password">Password:</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td><input type="password" name="password" required="" minlength="8" maxlength="100"></td>
                 </tr>
                 <tr>
                     <td>

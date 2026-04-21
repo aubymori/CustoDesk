@@ -67,6 +67,10 @@ button {
 	background: #eee;
 	border: 1px solid #000;
 	padding: 2px 4px;
+	box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	height: 13px;
+	line-height: 13px;
 
 	&:hover {
 		background: #ddd;
