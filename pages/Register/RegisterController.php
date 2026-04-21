@@ -37,9 +37,9 @@ class RegisterController extends PageWithPostController
             $this->addAlert(AlertType::ERROR, "Username must be at least 3 characters long.");
             goto fail;
         }
-        else if (strlen($username) > 20)
+        else if (strlen($username) > 15)
         {
-            $this->addAlert(AlertType::ERROR, "Username must be at most 20 characters long.");
+            $this->addAlert(AlertType::ERROR, "Username must be at most 15 characters long.");
             goto fail;
         }
         
