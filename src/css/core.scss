@@ -173,17 +173,17 @@ button {
 		margin-bottom: 0;
 	}
 
-	&.alert-error {
+	&.alertError {
 		background: #cc181e;
 	}
 
-	&.alert-warning {
+	&.alertWarning {
 		background: #f5d562;
 		color: #000;
 	}
 }
 
-.alert-text {
+.alertText {
 	border: 1px solid #fff;
 	padding: 4px;
 }

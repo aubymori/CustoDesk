@@ -39,12 +39,12 @@
 		<div id="alerts">
 			{% for alert in data.alerts %}
 			<div class="alert {{ alert.type }}">
-				<div class="alert-text">{{ alert.text }}</div>
+				<div class="alertText">{{ alert.text }}</div>
 			</div>
 			{% endfor %}
 			{% for error in data.errors %}
 			<div class="alert {{ error.alertType }}" style="font-weight: 400; text-align: left">
-				<div class="alert-text">
+				<div class="alertText">
 					<b>{{ error.typeStr }}</b>: {{ error.message }}<br>
 					In {{ error.file }}:{{ error.line }}
 				</div>
