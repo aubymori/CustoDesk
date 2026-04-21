@@ -173,7 +173,5 @@ class Controller
             return $instance->{$method}($request);
         else
             return $instance->get($request);
-
-        exit();
     }
 }

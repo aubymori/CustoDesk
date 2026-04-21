@@ -2,6 +2,7 @@
 namespace CustoDesk;
 
 use SQLite3;
+use SQLite3Result;
 use SQLite3Stmt;
 
 class DB
@@ -18,14 +19,61 @@ class DB
         if ($shouldInit)
         {
             $exec = file_get_contents(self::INIT_FILE);
-            self::exec($exec);
+            self::$db->exec($exec);
         }
         register_shutdown_function(self::class . "::closeConnection");
     }
 
-    public static function exec(string $query): bool
+    public static function exec(string $query, array $args): SQLite3Result
     {
-        return self::$db->exec($query);
+        $stmt = self::$db->prepare($query);
+        foreach ($args as $name => $value)
+        {
+            $type = SQLITE3_TEXT;
+            switch (gettype($value))
+            {
+                case "boolean":
+                case "integer":
+                    $type = SQLITE3_INTEGER;
+                    break;
+                case "double":
+                    $type = SQLITE3_FLOAT;
+                    break;
+            }
+
+            $stmt->bindValue(":$name", $value, $type);
+        }
+        
+        $res = $stmt->execute();
+        if (false === $res)
+        {
+            $sql = $stmt->getSQL(true);
+            throw new \Error("SQL query '$sql' failed");
+        }
+        $res->finalize();
+        return $res;
+    }
+
+    public static function query(string $query, array $args): array
+    {
+        $res = self::exec($query, $args);
+        $result = [];
+        while (false !== ($arr = $res->fetchArray(SQLITE3_ASSOC)))
+        {
+            $result[] = (object)$arr;
+        }
+        return $result;
+    }
+
+    public static function querySingle(string $query, array $args): ?object
+    {
+        $result = self::query($query, $args);
+        $size = count($result);
+        if ($size > 1)
+        {
+            throw new \Error("Expected size of 0 or 1, got $size");
+        }
+        return $size == 1 ? $result[0] : null;
     }
 
     public static function prepare(string $query): SQLite3Stmt|false

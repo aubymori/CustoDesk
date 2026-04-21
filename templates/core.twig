@@ -20,10 +20,10 @@
 				<a href="/search?type=post&amp;category=wallpaper">Wallpapers</a>
 				<a href="/search?type=post&amp;category=screenshot">Screenshots</a>
 				<div id="accountActions">
-					{% if custodesk.isLoggedIn() %}
-					<a href="/user/1" id="accountLink" onclick="toggleMenu('accountMenu', event)">aubymori</a>
+					{% if custodesk.session.isLoggedIn() %}
+					<a href="/user/{{ custodesk.session.getUserId() }}" id="accountLink" onclick="toggleMenu('accountMenu', event)">{{ custodesk.session.getUsername() }}</a>
 					<div id="accountMenu" class="menu">
-						<a href="/user/1">Profile</a>
+						<a href="/user/{{ custodesk.session.getUserId() }}">Profile</a>
 						<a href="/new">Create post</a>
 						<a href="/logout">Log out</a>
 					</div>

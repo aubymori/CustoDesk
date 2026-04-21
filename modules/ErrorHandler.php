@@ -61,16 +61,20 @@ class ErrorHandler
 
     public static function handleFatal(): void
     {
-        http_response_code(500);
-
         $err = error_get_last();
-        if ($err === null)
+        if ($err === null || self::errorAlertType($err["type"]) != AlertType::ERROR)
         {
+            ob_end_flush();
             return;
         }
+
+        http_response_code(500);
         
         try
         {
+            ob_end_clean();
+            ob_start();
+
             $data = [
                 "title" => "Fatal error"
             ];
@@ -79,6 +83,8 @@ class ErrorHandler
             if ($debug)
             {
                 $data += [
+                    "file" => $err["file"],
+                    "line" => $err["line"],
                     "message" => $err["message"]
                 ];
             }
@@ -87,6 +93,7 @@ class ErrorHandler
                 $d = new DateTime(timezone: new DateTimeZone("GMT+0"));
                 $log  = "CustoDesk Error Log\n";
                 $log .= $d->format("Y-m-d H:i:s e") . "\n";
+                $log .= "In " . $err["file"] . " (line " . $err["line"] . "):\n";
                 $log .= "\n";
                 $log .= $err["message"];
 
@@ -105,6 +112,7 @@ class ErrorHandler
             Controller::$twig->addGlobal("data", (object)$data);
             Controller::$twig->addGlobal("custodesk", new TemplateUtilsDelegate());
             echo Controller::$twig->render("500.twig", []);
+            ob_end_flush();
             exit();
         }
         catch (\Throwable $e)

@@ -37,7 +37,7 @@ class ServerConfig
         self::$debug = @$json->debug ?? false;
         if (self::$debug)
         {
-            self::$rateLimit = @$json->debugRateLimit ?? false;
+            self::$rateLimit = isset($json->debugRateLimit) && $json->debugRateLimit;
         }
         else
         {

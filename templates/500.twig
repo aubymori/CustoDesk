@@ -8,7 +8,7 @@
 The server was unable to process your request.
 <br><br>
 {% if custodesk.isDebug() %}
-<b>Details:</b><br>
+<b>In {{ data.file }} (line {{ data.line }}):</b><br>
 <pre>{{ data.message }}</pre>
 {% else %}
 Please give the following failure ID to a server administrator: <b>{{ data.failureId }}</b><br>

@@ -1,20 +1,31 @@
 <?php
 namespace CustoDesk\Page;
 error_reporting(0);
+ob_start();
 $GLOBALS["start_time"] = microtime(true);
 
 require "vendor/autoload.php";
 require "include/autoload.php";
 
 use CustoDesk\Controller;
+use CustoDesk\Cookie;
 use CustoDesk\DB;
 use CustoDesk\ServerConfig;
 use CustoDesk\ErrorHandler;
-use CustoDesk\RateLimit;
+use CustoDesk\Session;
 
 DB::init();
-ServerConfig::init();
 ErrorHandler::init();
+ServerConfig::init();
+Session::init();
+
+Controller::redirect([
+    "/logout" => function()
+    {
+        Cookie::delete("session");
+        return "/";
+    }
+]);
 
 Controller::route([
     "get" => [
@@ -31,3 +42,7 @@ Controller::route([
 ]);
 
 Controller::run();
+
+// Output buffer is either cleaned or flushed by ErrorHandler::handleFatal.
+// It must be done this way because that function is a shutdown function and
+// if we call ob_end_flush here it will execute *before* that is called.

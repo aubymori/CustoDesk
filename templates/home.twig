@@ -9,14 +9,14 @@
 {% endblock %}
 
 {% block left_col_content %}
-{% if custodesk.isLoggedIn() %}
+{% if custodesk.session.isLoggedIn() %}
 {{ card_begin("You are logged in as") }}
     <div class="user clearfix">
         <a href="/user/1" class="userIcon">
             <img src="{{ custodesk.vfl.resolveImage("user-icon") }}">
         </a>
         <div class="userDetails">
-            <a href="/users/1" class="userName">aubymori</a>
+            <a href="/users/{{ custodesk.session.getUserId() }}" class="userName">{{ custodesk.session.getUsername() }}</a>
             <div class="userRole">Member</div>
             <div class="userTime">Joined 1/1/1970</div>
             <div class="userPosts">10 fans</div>
@@ -84,7 +84,7 @@
 {% endblock %}
 
 {% block right_col_content %}
-{% if not custodesk.isLoggedIn() %}
+{% if not custodesk.session.isLoggedIn() %}
 {{ card_begin("Home") }}
     <p id="homeText">
         <b>CustoDesk</b> is a global community dedicated to desktop customization. Users can share resources
