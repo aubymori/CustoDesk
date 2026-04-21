@@ -25,8 +25,8 @@
                             Can contain alphanumeric characters (A-Z, 0-9) as well as underscores (_).
                         </span>
                     </td>
-                    <td class="top"><input type="text" name="username" {#required=""#} value="{{ data.username }}"
-                                           {#minlength="3" maxlength="20" pattern="^[a-zA-Z0-9]+$"#}></td>
+                    <td class="top"><input type="text" name="username" required="" value="{{ data.username }}"
+                                           minlength="3" maxlength="20" pattern="^[a-zA-Z0-9]+$"></td>
                 </tr>
                 <tr>
                     <td class="left">
@@ -35,8 +35,8 @@
                             Must be at least 8 characters and at most 100 characters.
                         </span>
                     </td>
-                    <td><input type="password" name="password" {#required=""
-                               minlength="8" maxlength="100"#}></td>
+                    <td><input type="password" name="password" required=""
+                               minlength="8" maxlength="100"></td>
                 </tr>
                 <tr>
                     <td class="left">
@@ -45,8 +45,8 @@
                             Type your password again to confirm it.
                         </span>
                     </td>
-                    <td><input type="password" name="confirm_password" {#required=""
-                               minlength="8" maxlength="100"#}></td>
+                    <td><input type="password" name="confirm_password" required=""
+                               minlength="8" maxlength="100"></td>
                 </tr>
                 <tr>
                     <td class="left">
