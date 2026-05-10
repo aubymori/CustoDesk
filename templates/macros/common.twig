@@ -36,3 +36,16 @@
     </div>
 </div>
 {% endmacro %}
+
+{% macro user(data) %}
+<div class="user clearfix">
+    <a href="/user/{{ data.id }}" class="userIcon">
+        <img src="{{ data.avatarUrl }}">
+    </a>
+    <div class="userDetails">
+        <a href="/user/{{ data.id }}" class="userName">{{ data.username }}</a>
+        <div class="userRole">Member</div>
+        <div class="userTime">Joined {{ custodesk.time.formatDate(data.createdAt) }}</div>
+    </div>
+</div>
+{% endmacro %}

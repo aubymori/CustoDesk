@@ -1,0 +1,43 @@
+.action {
+    display: block;
+    margin-bottom: 2px;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+
+    /* Underline on the anchor itself looks a bit odd; delegate it to the text. */
+    &:hover, &:focus {
+        text-decoration: none;
+
+        .actionText {
+            text-decoration: underline;
+        }
+    }
+}
+
+.actionSprite {
+    display: inline-block;
+    vertical-align: middle;
+
+    &.profile {
+        @include sprite("sprites", "profile");
+    }
+
+    &.mail {
+        @include sprite("sprites", "mail");
+    }
+
+    &.cpanel {
+        @include sprite("sprites", "cpanel");
+    }
+
+    &.compose {
+        @include sprite("sprites", "compose");
+    }
+}
+
+.actionText {
+    margin-left: 4px;
+    vertical-align: middle;
+}

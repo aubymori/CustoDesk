@@ -1,7 +1,10 @@
 <?php
-namespace CustoDesk;
+namespace CustoDesk\Util;
 
-class User
+use CustoDesk\ServerConfig;
+use CustoDesk\DB;
+
+class UserUtils
 {
     public const USERNAME_REGEX = "/^[a-zA-Z0-9_]+$/";
 

@@ -3,6 +3,7 @@
 {% from "macros/common.twig" import card_begin %}
 {% from "macros/common.twig" import card_end %}
 {% from "macros/common.twig" import post %}
+{% from "macros/common.twig" import user %}
 
 {% block css %}
 {{ core.css("home") }}
@@ -11,17 +12,25 @@
 {% block left_col_content %}
 {% if custodesk.session.isLoggedIn() %}
 {{ card_begin("You are logged in as") }}
-    <div class="user clearfix">
-        <a href="/user/1" class="userIcon">
-            <img src="{{ custodesk.vfl.resolveImage("user-icon") }}">
-        </a>
-        <div class="userDetails">
-            <a href="/users/{{ custodesk.session.getUserId() }}" class="userName">{{ custodesk.session.getUsername() }}</a>
-            <div class="userRole">Member</div>
-            <div class="userTime">Joined 1/1/1970</div>
-            <div class="userPosts">10 fans</div>
-        </div>
-    </div>
+    {{ user(data.user) }}
+{{ card_end() }}
+{{ card_begin("Actions") }}
+    <a href="/user/{{ custodesk.session.getUserId() }}" class="action">
+        <div class="actionSprite profile"></div>
+        <span class="actionText">View your profile</span>
+    </a>
+    <a href="/inbox" class="action">
+        <div class="actionSprite mail"></div>
+        <span class="actionText">View your inbox</span>
+    </a>
+    <a href="/new" class="action">
+        <div class="actionSprite compose"></div>
+        <span class="actionText">Create a new post</span>
+    </a>
+    <a href="/cpanel" class="action">
+        <div class="actionSprite cpanel"></div>
+        <span class="actionText">Change your settings</span>
+    </a>
 {{ card_end() }}
 {% else %}
 {{ card_begin("Log in") }}

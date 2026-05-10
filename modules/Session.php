@@ -2,6 +2,7 @@
 namespace CustoDesk;
 
 use CustoDesk\Util\TimeUtils;
+use CustoDesk\Util\UserUtils;
 
 class Session
 {
@@ -22,7 +23,7 @@ class Session
             return;
 
         self::$userId = $result->user_id;
-        self::$username = User::usernameFromId($result->user_id);
+        self::$username = UserUtils::usernameFromId($result->user_id);
         self::$loggedIn = true;
     }
 
@@ -43,7 +44,7 @@ class Session
         if (!$result)
             return false;
 
-        $saltedPass = User::saltPassword($password);
+        $saltedPass = UserUtils::saltPassword($password);
         if (!password_verify($saltedPass, $result->password))
             return false;
 

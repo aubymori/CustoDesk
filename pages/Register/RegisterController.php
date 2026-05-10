@@ -6,7 +6,7 @@ use CustoDesk\Page\Common\AlertType;
 use CustoDesk\Page\Common\PageWithPostController;
 use CustoDesk\RequestMetadata;
 use CustoDesk\Session;
-use CustoDesk\User;
+use CustoDesk\Util\UserUtils;
 use CustoDesk\Util\TimeUtils;
 
 class RegisterController extends PageWithPostController
@@ -43,7 +43,7 @@ class RegisterController extends PageWithPostController
             goto fail;
         }
         
-        if (!preg_match(User::USERNAME_REGEX, $username))
+        if (!preg_match(UserUtils::USERNAME_REGEX, $username))
         {
             $this->addAlert(AlertType::ERROR, "Username contains invalid characters.");
             goto fail;
@@ -69,13 +69,13 @@ class RegisterController extends PageWithPostController
             goto fail;
         }
 
-        if (-1 != User::idFromUsername($username))
+        if (-1 != UserUtils::idFromUsername($username))
         {
             $this->addAlert(AlertType::ERROR, "That username is already in use.");
             goto fail;
         }
         
-        $hashedPass = password_hash(User::saltPassword($password), PASSWORD_BCRYPT);
+        $hashedPass = password_hash(UserUtils::saltPassword($password), PASSWORD_BCRYPT);
         try
         {
             DB::exec("INSERT INTO users (username, password, created_at) VALUES (:username, :password, :created_at)", [
@@ -90,7 +90,7 @@ class RegisterController extends PageWithPostController
             goto fail;
         }
 
-        $id = User::idFromUsername($username);
+        $id = UserUtils::idFromUsername($username);
         if (!Session::createSession($id, $password, (isset($_POST["remember"]) && $_POST["remember"] == "on")))
         {
             $this->addAlert(AlertType::ERROR, "The account was created, but could not be logged into.");

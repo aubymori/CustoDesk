@@ -5,7 +5,7 @@ use CustoDesk\Page\Common\AlertType;
 use CustoDesk\Page\Common\PageWithPostController;
 use CustoDesk\RequestMetadata;
 use CustoDesk\Session;
-use CustoDesk\User;
+use CustoDesk\Util\UserUtils;
 
 class LoginController extends PageWithPostController
 {
@@ -32,7 +32,7 @@ class LoginController extends PageWithPostController
         $password = @$_POST["password"] ?? "";
         $remember = (isset($_POST["remember"]) && $_POST["remember"] == "on");
 
-        $userId = User::idFromUsername(trim($username));
+        $userId = UserUtils::idFromUsername(trim($username));
         if ($userId == -1 || !Session::createSession($userId, trim($password), $remember))
         {
             $this->addAlert(AlertType::ERROR, "Incorrect username or password.");
