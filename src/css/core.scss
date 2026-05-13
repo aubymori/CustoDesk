@@ -41,26 +41,6 @@ textarea {
 	}
 }
 
-input[type="checkbox"] {
-	background: #fff;
-	border: 1px solid #000;
-	width: 13px !important;
-	height: 13px !important;
-	appearance: none;
-
-	&, & + label {
-		vertical-align: middle;
-	}
-
-	&:checked {
-		@include sprite("sprites", "check");
-	}
-
-	&:active {
-		background-color: #bbb;
-	}
-}
-
 input[type="button"],
 input[type="submit"],
 button {
