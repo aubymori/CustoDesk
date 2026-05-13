@@ -12,6 +12,7 @@ use CustoDesk\Cookie;
 use CustoDesk\DB;
 use CustoDesk\ServerConfig;
 use CustoDesk\ErrorHandler;
+use CustoDesk\Page\ControlPanel\ControlPanelController;
 use CustoDesk\Session;
 
 DB::init();
@@ -33,6 +34,7 @@ Controller::route([
         "/about" => About\AboutController::class,
         "/login" => Login\LoginController::class,
         "/register" => Register\RegisterController::class,
+        "/cpanel" => ControlPanel\ControlPanelController::class,
         "default" => Common\PageController::class,
     ],
     "post" => [

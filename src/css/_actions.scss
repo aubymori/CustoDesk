@@ -13,6 +13,14 @@
         .actionText {
             text-decoration: underline;
         }
+
+        &.selected .actionText {
+            text-decoration: none;
+        }
+    }
+
+    &.selected {
+        font-weight: 700;
     }
 }
 
