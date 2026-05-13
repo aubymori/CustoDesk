@@ -12,12 +12,11 @@ use CustoDesk\Cookie;
 use CustoDesk\DB;
 use CustoDesk\ServerConfig;
 use CustoDesk\ErrorHandler;
-use CustoDesk\Page\ControlPanel\ControlPanelController;
 use CustoDesk\Session;
 
 DB::init();
-ErrorHandler::init();
 ServerConfig::init();
+ErrorHandler::init();
 Session::init();
 
 Controller::redirect([

@@ -11,6 +11,7 @@ class ServerConfig
     {
         echo "<h1>Server Misconfiguration</h1>";
         echo "<p>" . $err . " See config.schema.jsonc for a rundown on how it should go.</p>";
+        ob_end_flush();
         exit();
     }
 
@@ -19,7 +20,7 @@ class ServerConfig
         $content = file_get_contents("config.json");
         if ($content === false)
         {
-            self::error("Config file does not exist.");
+            self::error("config.json does not exist.");
         }
 
         $json = json_decode($content);
