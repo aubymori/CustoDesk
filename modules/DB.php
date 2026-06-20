@@ -24,7 +24,7 @@ class DB
         register_shutdown_function(self::class . "::closeConnection");
     }
 
-    public static function exec(string $query, array $args): SQLite3Result
+    public static function exec(string $query, array $args = []): SQLite3Result
     {
         $stmt = self::$db->prepare($query);
         foreach ($args as $name => $value)
@@ -54,7 +54,7 @@ class DB
         return $res;
     }
 
-    public static function query(string $query, array $args): array
+    public static function query(string $query, array $args = []): array
     {
         $res = self::exec($query, $args);
         $result = [];
@@ -65,7 +65,7 @@ class DB
         return $result;
     }
 
-    public static function querySingle(string $query, array $args): ?object
+    public static function querySingle(string $query, array $args = []): ?object
     {
         $result = self::query($query, $args);
         $size = count($result);

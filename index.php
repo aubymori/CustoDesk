@@ -34,11 +34,13 @@ Controller::route([
         "/login" => Login\LoginController::class,
         "/register" => Register\RegisterController::class,
         "/cpanel" => ControlPanel\ControlPanelController::class,
+        "/setup" => Setup\SetupController::class,
         "default" => Common\PageController::class,
     ],
     "post" => [
         "/login" => Login\LoginController::class,
         "/register" => Register\RegisterController::class,
+        "/setup" => Setup\SetupController::class,
     ],
 ]);
 

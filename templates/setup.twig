@@ -1,0 +1,36 @@
+{% extends "core.twig" %}
+{% from "macros/common.twig" import card_begin %}
+{% from "macros/common.twig" import card_end %}
+
+{% block content %}
+<style>
+    td:first-child {
+        text-align: right;
+    }
+</style>
+{{ card_begin("Set up CustoDesk") }}
+    <p>Make the initial admin account.</p>
+    <form action="" method="post" id="loginForm">
+        <table>
+            <tbody>
+                <tr>
+                    <td><label for="username">Username:</label></td>
+                    <td><input type="text" name="username" value="{{ data.username }}" required=""></td>
+                </tr>
+                <tr>
+                    <td><label for="password">Password:</label></td>
+                    <td><input type="password" name="password" required=""></td>
+                </tr>
+                <tr>
+                    <td><label for="confirm_password">Confirm password:</label></td>
+                    <td><input type="password" name="confirm_password" required=""></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="submit" value="Create"></td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+{{ card_end() }}
+{% endblock %}

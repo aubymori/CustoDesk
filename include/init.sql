@@ -9,7 +9,8 @@ CREATE TABLE users (
     id INTEGER PRIMARY KEY NOT NULL,
     username CHAR(20),
     password TEXT,
-    created_at INTEGER
+    created_at INTEGER,
+    role TEXT DEFAULT "Member"
 );
 
 CREATE TABLE sessions(

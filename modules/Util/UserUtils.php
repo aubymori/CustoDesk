@@ -14,6 +14,22 @@ class UserUtils
         return "$password" . "$" . "$salt";
     }
 
+    public static function hashPassword(#[\SensitiveParameter] string $password): string
+    {
+        return password_hash(self::saltPassword($password), PASSWORD_BCRYPT);
+    }
+
+    public static function verifyPassword(int $userId, #[\SensitiveParameter] string $password): bool
+    {
+        $result = DB::querySingle("SELECT password FROM users WHERE id=:id", [
+            "id" => $userId
+        ]);
+        if (!$result)
+            return false;
+
+        return password_verify(self::hashPassword($password), $result->password);
+    }
+
     public static function idFromUsername(string $username): int
     {
         $result = DB::querySingle("SELECT id FROM users WHERE username=:username COLLATE NOCASE", [

@@ -11,19 +11,21 @@ class User
     public int $id;
     public string $avatarUrl;
     public int $createdAt;
+    public string $role;
 
     public static function fromId(int $id): self
     {
         $new = new self;
         $new->id = $id;
 
-        $result = DB::querySingle("SELECT username, created_at FROM users WHERE id=:id", [
+        $result = DB::querySingle("SELECT username, created_at, role FROM users WHERE id=:id", [
             "id" => $id
         ]);
         if ($result)
         {
             $new->username = $result->username;
             $new->createdAt = $result->created_at;
+            $new->role = $result->role;
         }
 
         $new->avatarUrl = VFL::getInstance()->resolveImage("user-icon");
