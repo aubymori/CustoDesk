@@ -2,12 +2,12 @@
 namespace CustoDesk\Page\Login;
 
 use CustoDesk\Page\Common\AlertType;
-use CustoDesk\Page\Common\PageWithPostController;
+use CustoDesk\Page\Common\PageController;
 use CustoDesk\RequestMetadata;
 use CustoDesk\Session;
 use CustoDesk\Util\UserUtils;
 
-class LoginController extends PageWithPostController
+class LoginController extends PageController
 {
     public string $template = "login";
     public string $title = "Log in";

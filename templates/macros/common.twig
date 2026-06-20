@@ -49,3 +49,29 @@
     </div>
 </div>
 {% endmacro %}
+
+{% macro subnav(items) %}
+{% for item in items %}
+    {% set icon = item[0] %}
+    {% set name = item[1] %}
+    {% set subpage = item[2] %}
+    {% set url = item[3] %}
+    
+    {% set selected = (data.subpage == subpage) %}
+
+    {% if selected %}
+    <span class="action selected">
+    {% else %}
+    <a href="{{ url }}" class="action">
+    {% endif %}
+        {% if icon %}
+        <span class="actionSprite {{ icon }}"></span>
+        {% endif %}
+        <span class="actionText">{{ name }}</span>
+    {% if selected %}
+    </span>
+    {% else %}
+    </a>
+    {% endif %}
+{% endfor %}
+{% endmacro %}

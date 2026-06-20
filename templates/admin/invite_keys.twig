@@ -1,0 +1,39 @@
+{% extends "admin/admin_page.twig" %}
+{% from "macros/common.twig" import card_begin, card_end %}
+
+{% block right_col_content %}
+<div class="tableCardWrapper">
+    <table class="tableCard">
+        <tbody>
+            <tr>
+                <th>Invite Key</th>
+                <th>User</th>
+                <th>Action</th>
+            </tr>
+            <tr>
+                <td><code>ASDF1234</code></td>
+                <td><a href="/users/1">aubymori</a></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><code>ASDF1234</code></td>
+                <td><a href="/users/1">aubymori</a></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><code>ASDF1234</code></td>
+                <td></td>
+                <td><a href="?revoke=ASDF1234">Revoke</a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+{{ card_begin("Generate Invite Key") }}
+    <p>Click Generate to generate a new invite key. It will be appended to the end of the table.</p>
+    <form action="" method="post">
+        <input type="hidden" name="generate" value="1">
+        <input type="submit" value="Generate">
+    </form>
+{{ card_end() }}
+{% endblock %}

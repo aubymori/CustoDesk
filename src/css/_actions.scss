@@ -27,6 +27,7 @@
 .actionSprite {
     display: inline-block;
     vertical-align: middle;
+    margin-right: 4px;
 
     &.profile {
         @include sprite("sprites", "profile");
@@ -46,6 +47,5 @@
 }
 
 .actionText {
-    margin-left: 4px;
     vertical-align: middle;
 }

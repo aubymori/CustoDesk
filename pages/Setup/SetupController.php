@@ -3,14 +3,14 @@ namespace CustoDesk\Page\Setup;
 
 use CustoDesk\DB;
 use CustoDesk\Page\Common\AlertType;
-use CustoDesk\Page\Common\PageWithPostController;
+use CustoDesk\Page\Common\PageController;
 use CustoDesk\Page\Common\UserRole;
 use CustoDesk\RequestMetadata;
 use CustoDesk\Session;
 use CustoDesk\Util\UserUtils;
 use CustoDesk\Util\TimeUtils;
 
-class SetupController extends PageWithPostController
+class SetupController extends PageController
 {
     public string $template = "setup";
     public string $title = "Setup";

@@ -12,6 +12,7 @@ class PageController
     public string $title = "";
     public string $template = "404";
     protected object $data;
+    protected bool $dontEvenTry = false;
 
     protected function redirect(string $url): void
     {
@@ -30,7 +31,7 @@ class PageController
         $this->data->alerts = [];
         if (RateLimit::check())
         {
-            if (!$this->onGet($request))
+            if ($this->dontEvenTry || !$this->onGet($request))
             {
                 $this->template = "404";
                 http_response_code(404);
@@ -51,6 +52,37 @@ class PageController
     }
 
     public function onGet(RequestMetadata $request): bool
+    {
+        return false;
+    }
+
+    public function post(RequestMetadata $request): void
+    {
+        $this->data = (object)[];
+        $this->data->alerts = [];
+        if (RateLimit::check())
+        {
+            if ($this->dontEvenTry || !$this->onPost($request))
+            {
+                $this->template = "404";
+                http_response_code(404);
+            }
+            $this->data->title = $this->title;
+        }
+        else
+        {
+            http_response_code(429);
+            $this->template = "rate_limit";
+            $this->data->title = "Too Many Requests";
+        }
+        
+        $this->data->errors = ErrorHandler::$errors;
+        Controller::$twig->addGlobal("data", $this->data);
+        Controller::$twig->addGlobal("custodesk", new TemplateUtilsDelegate());
+        echo Controller::$twig->render($this->template . ".twig", []);
+    }
+
+    public function onPost(RequestMetadata $request): bool
     {
         return false;
     }

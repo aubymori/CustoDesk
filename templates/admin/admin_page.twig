@@ -1,0 +1,10 @@
+{% extends "two_col_page.twig" %}
+{% from "macros/common.twig" import subnav, card_begin, card_end %}
+
+{% block left_col_content %}
+{{ card_begin("Admin") }}
+    {{ subnav([
+        [ null, "Invite Keys", "invite_keys", "/admin/invite_keys" ],
+    ]) }}
+{{ card_end() }}
+{% endblock %}

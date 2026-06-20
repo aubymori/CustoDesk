@@ -3,13 +3,13 @@ namespace CustoDesk\Page\Register;
 
 use CustoDesk\DB;
 use CustoDesk\Page\Common\AlertType;
-use CustoDesk\Page\Common\PageWithPostController;
+use CustoDesk\Page\Common\PageController;
 use CustoDesk\RequestMetadata;
 use CustoDesk\Session;
 use CustoDesk\Util\UserUtils;
 use CustoDesk\Util\TimeUtils;
 
-class RegisterController extends PageWithPostController
+class RegisterController extends PageController
 {
     public string $template = "register";
     public string $title = "Register";

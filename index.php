@@ -29,18 +29,31 @@ Controller::redirect([
 
 Controller::route([
     "get" => [
+        /* Regular pages */
         "/" => Home\HomeController::class,
         "/about" => About\AboutController::class,
         "/login" => Login\LoginController::class,
         "/register" => Register\RegisterController::class,
         "/cpanel" => ControlPanel\ControlPanelController::class,
-        "/setup" => Setup\SetupController::class,
+
+        /* Admin pages */
+        "/admin/setup" => Setup\SetupController::class,
+        "/admin/invite_keys" => Admin\InviteKeysController::class,
+
+        /* 404 */
         "default" => Common\PageController::class,
     ],
     "post" => [
+        /* Regular pages */
         "/login" => Login\LoginController::class,
         "/register" => Register\RegisterController::class,
-        "/setup" => Setup\SetupController::class,
+
+        /* Admin pages */
+        "/admin/setup" => Setup\SetupController::class,
+        "/admin/invite_keys" => Admin\InviteKeysController::class,
+
+        /* 404 */
+        "default" => Common\PageController::class,
     ],
 ]);
 

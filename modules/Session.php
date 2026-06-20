@@ -1,6 +1,7 @@
 <?php
 namespace CustoDesk;
 
+use CustoDesk\Page\Common\UserRole;
 use CustoDesk\Util\TimeUtils;
 use CustoDesk\Util\UserUtils;
 
@@ -8,6 +9,7 @@ class Session
 {
     private static int $userId = -1;
     private static string $username = "";
+    private static UserRole $role = UserRole::MEMBER;
     private static bool $loggedIn = false;
 
     public static function init(): void
@@ -24,6 +26,7 @@ class Session
 
         self::$userId = $result->user_id;
         self::$username = UserUtils::usernameFromId($result->user_id);
+        self::$role = UserUtils::getRole($result->user_id);
         self::$loggedIn = true;
     }
 
@@ -74,5 +77,10 @@ class Session
     public static function getUsername(): string
     {
         return self::$username;
+    }
+
+    public static function getRole(): UserRole
+    {
+        return self::$role;
     }
 }

@@ -3,6 +3,7 @@ namespace CustoDesk\Util;
 
 use CustoDesk\ServerConfig;
 use CustoDesk\DB;
+use CustoDesk\Page\Common\UserRole;
 
 class UserUtils
 {
@@ -50,5 +51,16 @@ class UserUtils
             return "";
 
         return $result->username;
+    }
+
+    public static function getRole(int $id): UserRole
+    {
+        $result = DB::querySingle("SELECT role FROM users WHERE id=:id", [
+            "id" => $id
+        ]);
+        if (!$result)
+            return UserRole::MEMBER;
+
+        return UserRole::from($result->role);
     }
 }
