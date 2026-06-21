@@ -2,29 +2,34 @@
 {% from "macros/common.twig" import card_begin, card_end %}
 
 {% block right_col_content %}
+{% if data.disabled %}
+{{ card_begin("Invite Keys") }}
+    <p>Invite keys are currently disabled.</p>
+{{ card_end() }}
+{% else %}
 <div class="tableCardWrapper">
     <table class="tableCard">
         <tbody>
             <tr>
-                <th>Invite Key</th>
-                <th>User</th>
-                <th>Action</th>
+                <th width="20%">Invite Key</th>
+                <th width="40%">Created by</th>
+                <th width="40%">Used by</th>
             </tr>
+            {% for key in data.keys %}
             <tr>
-                <td><code>ASDF1234</code></td>
-                <td><a href="/users/1">aubymori</a></td>
-                <td></td>
+                <td><code>{{ key.key }}</code></td>
+                <td>
+                    <a href="/user/{{ key.creator_id }}">{{ custodesk.users.usernameFromId(key.creator_id) }}</a> at {{ custodesk.time.formatDateTime(key.created_at) }}
+                </td>
+                <td>
+                    {% if key.user_id %}
+                    <a href="/user/{{ key.user_id }}">{{ custodesk.users.usernameFromId(key.user_id) }}</a> at {{ custodesk.time.formatDateTime(key.used_at) }}
+                    {% else %}
+                    Nobody. <a href="?revoke={{ key.key }}">Revoke</a>
+                    {% endif %}
+                </td>
             </tr>
-            <tr>
-                <td><code>ASDF1234</code></td>
-                <td><a href="/users/1">aubymori</a></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td><code>ASDF1234</code></td>
-                <td></td>
-                <td><a href="?revoke=ASDF1234">Revoke</a></td>
-            </tr>
+            {% endfor %}
         </tbody>
     </table>
 </div>
@@ -36,4 +41,5 @@
         <input type="submit" value="Generate">
     </form>
 {{ card_end() }}
+{% endif %}
 {% endblock %}

@@ -6,8 +6,6 @@
         <meta charset="UTF-8">
         <title>CustoDesk{{ data.title ? ": " ~ data.title }}</title>
 		<link rel="shortcut icon" href="{{ custodesk.vfl.resolveImage("favicon") }}" type="image/png">
-		{{ core.js("core") }}
-		{% block js %}{% endblock %}
         {{ core.css("core") }}
 		{% block css %}{% endblock %}
     </head>
@@ -39,7 +37,7 @@
 		<div id="alerts">
 			{% for alert in data.alerts %}
 			<div class="alert {{ alert.type }}">
-				<div class="alertText">{{ alert.text }}</div>
+				<div class="alertText">{{ alert.text|raw }}</div>
 			</div>
 			{% endfor %}
 			{% for error in data.errors %}
@@ -59,6 +57,12 @@
 		<div id="footer">
 			© 2026 CustoDesk. All rights reserved.<br>
 			Page rendered in {{ custodesk.getRenderTime() }} seconds
+		</div>
+
+		{{ core.js("core") }}
+		{% for module in custodesk.modules.get() %}
+		{{ core.js(module) }}
+		{% endfor %}
     </body>
 </html>
 {% endapply %}

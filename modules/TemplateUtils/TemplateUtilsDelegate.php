@@ -9,18 +9,16 @@ class TemplateUtilsDelegate
     public VFL $vfl;
     public TimeUtilsDelegate $time;
     public SessionDelegate $session;
+    public UserUtilsDelegate $users;
+    public Modules $modules;
 
     public function __construct()
     {
         $this->vfl = VFL::getInstance();
         $this->time = new TimeUtilsDelegate();
         $this->session = new SessionDelegate();
-    }
-
-    /* TODO(aubymori): Remove and replace with a delegate for the Session class */
-    public function isLoggedIn(): bool
-    {
-        return Session::isLoggedIn();
+        $this->users = new UserUtilsDelegate();
+        $this->modules = new Modules();
     }
 
     public function getRenderTime(): string

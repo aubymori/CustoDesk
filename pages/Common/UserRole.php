@@ -22,4 +22,14 @@ enum UserRole : string
     {
         return $this->toOrdinal() >= $other->toOrdinal();
     }
+
+    public function isAbove(UserRole $other): bool
+    {
+        return $this->toOrdinal() > $other->toOrdinal();
+    }
+
+    public function isBelow(UserRole $other): bool
+    {
+        return $this->toOrdinal() < $other->toOrdinal();
+    }
 }

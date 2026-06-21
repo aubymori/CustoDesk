@@ -7,5 +7,9 @@
 
     /* If debugging is enabled, enable this to enable the rate limiter
        for debugging purposes. */
-    "debugRateLimit": false
+    "debugRateLimit": false,
+
+    /* Require invite keys for signup, and require login to view
+       pages. */
+    "inviteKeys": false
 }

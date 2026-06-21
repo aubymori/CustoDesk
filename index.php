@@ -38,7 +38,11 @@ Controller::route([
 
         /* Admin pages */
         "/admin/setup" => Setup\SetupController::class,
+        "/admin" => Admin\DashboardController::class,
         "/admin/invite_keys" => Admin\InviteKeysController::class,
+
+        /* Debug pages */
+        "/debug/rich_edit" => Debug\RichEditController::class,
 
         /* 404 */
         "default" => Common\PageController::class,
@@ -51,6 +55,9 @@ Controller::route([
         /* Admin pages */
         "/admin/setup" => Setup\SetupController::class,
         "/admin/invite_keys" => Admin\InviteKeysController::class,
+
+        /* Debug pages */
+        "/debug/rich_edit" => Debug\RichEditController::class,
 
         /* 404 */
         "default" => Common\PageController::class,

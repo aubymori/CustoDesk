@@ -6,6 +6,7 @@ class ServerConfig
     private static string $salt;
     private static bool $debug;
     private static bool $rateLimit;
+    private static bool $inviteKeys;
 
     private static function error(string $err): void
     {
@@ -44,6 +45,7 @@ class ServerConfig
         {
             self::$rateLimit = true;
         }
+        self::$inviteKeys = @$json->inviteKeys ?? false;
     }
 
     public static function getSalt(): string
@@ -59,5 +61,10 @@ class ServerConfig
     public static function shouldRateLimit(): bool
     {
         return self::$rateLimit;
+    }
+
+    public static function requireInviteKeys(): bool
+    {
+        return self::$inviteKeys;
     }
 }

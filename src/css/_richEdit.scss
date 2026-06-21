@@ -1,0 +1,39 @@
+#richEditChoices > * {
+    vertical-align: middle;
+}
+
+#richEditFormats {
+    border: 1px solid #000;
+    padding: 4px;
+    background: #ddd;
+    margin-top: 5px;
+}
+
+#richEditFormats button {
+    width: 16px;
+    height: 16px;
+    padding: 1px;
+    margin-right: 2px;
+}
+
+@mixin format-sprite($type) {
+    #richEditFormat-#{$type} .sprite {
+        @include sprite("sprites", "text_" + #{$type});
+    }
+}
+
+@include format-sprite("bold");
+@include format-sprite("italic");
+@include format-sprite("underline");
+@include format-sprite("strikethrough");
+
+#richEditText {
+    margin-top: 0;
+    width: 100%;
+    @include box-sizing(border-box);
+    border-top: 0;
+    resize: vertical;
+    font-family: monospace;
+    font-size: 13px;
+    height: 150px;
+}

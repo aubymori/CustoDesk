@@ -15,7 +15,7 @@ class ControlPanelController extends PageController
     {
         if (!Session::isLoggedIn())
         {
-            $this->redirect("/login");
+            $this->redirectToLogin();
         }
 
         $this->data->user = User::fromId(Session::getUserId());

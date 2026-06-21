@@ -1,18 +1,15 @@
 <?php
-namespace CustoDesk\Page\Admin;
+namespace CustoDesk\Page\Debug;
 
 use CustoDesk\Page\Common\PageController;
-use CustoDesk\Page\Common\UserRole;
 use CustoDesk\RequestMetadata;
-use CustoDesk\Session;
+use CustoDesk\ServerConfig;
 
-class AdminPageController extends PageController
+class DebugPageController extends PageController
 {
-    protected UserRole $requiredRole = UserRole::ADMIN;
-
     public function get(RequestMetadata $request): void
     {
-        if (!Session::getRole()->isAtLeast($this->requiredRole))
+        if (!ServerConfig::isDebug())
         {
             $this->dontEvenTry = true;
         }
@@ -21,7 +18,7 @@ class AdminPageController extends PageController
 
     public function post(RequestMetadata $request): void
     {
-        if (!Session::getRole()->isAtLeast($this->requiredRole))
+        if (!ServerConfig::isDebug())
         {
             $this->dontEvenTry = true;
         }

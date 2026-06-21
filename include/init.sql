@@ -20,3 +20,12 @@ CREATE TABLE sessions(
     created_at INTEGER,
     user_agent TEXT
 );
+
+CREATE TABLE invite_keys(
+    id INTEGER PRIMARY KEY NOT NULL,
+    key CHAR(8),
+    creator_id INTEGER,
+    created_at INTEGER,
+    user_id INTEGER,
+    used_at INTEGER
+);

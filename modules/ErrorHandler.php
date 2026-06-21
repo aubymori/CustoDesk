@@ -11,6 +11,7 @@ use function CustoDesk\rootpath;
 
 class ErrorHandler
 {
+    private static bool $disabled = false;
     public static array $errors = [];
 
     public static function init()
@@ -137,7 +138,7 @@ class ErrorHandler
         int $errline
     ): bool
     {
-        if (ServerConfig::isDebug())
+        if (!self::$disabled && ServerConfig::isDebug())
         {
             self::$errors[] = (object)[
                 "message" => $errstr,
@@ -148,5 +149,15 @@ class ErrorHandler
             ];
         }
         return true;
+    }
+
+    public static function disable(): void
+    {
+        self::$disabled = true;
+    }
+
+    public static function enable(): void
+    {
+        self::$disabled = false;
     }
 }

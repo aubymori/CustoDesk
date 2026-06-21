@@ -65,7 +65,7 @@ class SetupController extends PageController
         $confirmPassword = @$_POST["confirm_password"] ?? "";
         if ($password != $confirmPassword)
         {
-            $this->addAlert(AlertType::ERROR, "Passwords do not match");
+            $this->addAlert(AlertType::ERROR, "Passwords do not match.");
             return true;
         }
 
@@ -86,7 +86,7 @@ class SetupController extends PageController
         }
 
         $id = UserUtils::idFromUsername($username);
-        if (!Session::createSession($id, $password, (isset($_POST["remember"]) && $_POST["remember"] == "on")))
+        if (!Session::createSession($id, $password, true))
         {
             $this->addAlert(AlertType::ERROR, "The account was created, but could not be logged into.");
             return true;

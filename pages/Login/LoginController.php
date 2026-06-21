@@ -18,6 +18,12 @@ class LoginController extends PageController
         {
             $this->redirect("/");
         }
+
+        if (isset($_GET["next"]))
+        {
+            $this->addAlert(AlertType::ERROR, "Please log in.");
+        }
+
         return true;
     }
 
@@ -26,6 +32,11 @@ class LoginController extends PageController
         if (Session::isLoggedIn())
         {
             $this->redirect("/");
+        }
+
+        if (isset($_GET["next"]))
+        {
+            $this->addAlert(AlertType::ERROR, "Please log in.");
         }
 
         $username = @$_POST["username"] ?? "";
@@ -39,7 +50,7 @@ class LoginController extends PageController
             goto fail;
         }
         
-        $this->redirect("/");
+        $this->redirect(isset($_GET["next"]) ? $_GET["next"] : "/");
         return true;
 
 fail:

@@ -48,6 +48,18 @@
                     <td><input type="password" name="confirm_password" required=""
                                minlength="8" maxlength="100"></td>
                 </tr>
+                {% if data.requireInviteKey %}
+                <tr>
+                    <td class="left">
+                        <label for="invite_key">Invite key<span class="required">*</span>:</label><br>
+                        <span class="description">
+                            You should have gotten one from an administrator.
+                        </span>
+                    </td>
+                    <td><input type="text" name="invite_key" required=""
+                               minlength="8" maxlength="8"></td>
+                </tr>
+                {% endif %}
                 <tr>
                     <td class="left">
                         Remember me:<br>

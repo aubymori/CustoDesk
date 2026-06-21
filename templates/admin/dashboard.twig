@@ -1,0 +1,8 @@
+{% extends "admin/admin_page.twig" %}
+{% from "macros/common.twig" import card_begin, card_end, user %}
+
+{% block right_col_content %}
+{{ card_begin("Dashboard") }}
+    {{ user(data.user) }}
+{{ card_end() }}
+{% endblock %}

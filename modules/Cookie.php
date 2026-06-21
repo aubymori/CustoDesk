@@ -9,12 +9,20 @@ class Cookie
 
     public static function set(string $name, mixed $value, bool $remember = true): void
     {
-        setcookie($name, (string)$value, $remember ? (time() + self::EXPIRE_TIME) : 0);
+        setcookie(
+            name: $name,
+            value: (string)$value,
+            expires_or_options: $remember ? (time() + self::EXPIRE_TIME) : 0,
+            path: "/");
     }
 
     public static function delete(string $name): void
     {
-        setcookie($name, "", 1);
+        setcookie(
+            name: $name,
+            value: "",
+            expires_or_options: 1,
+            path: "/");
     }
 
     public static function get(string $name): ?string
