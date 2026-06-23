@@ -1,6 +1,7 @@
 <?php
 namespace CustoDesk;
 
+use CustoDesk\TemplateUtils\SpaceFilterExtension;
 use CustoDesk\Util\GlobToRegexp;
 use CustoDesk\RequestMetadata;
 use function CustoDesk\rootpath;
@@ -28,6 +29,7 @@ class Controller
             "cache" => rootpath("cache/templates"),
             "auto_reload" => true,
         ]);
+        self::$twig->addExtension(new SpaceFilterExtension());
     }
 
     /**
