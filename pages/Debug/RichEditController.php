@@ -28,9 +28,6 @@ class RichEditController extends DebugPageController
             case "markdown":
                 $html = MarkdownParser::parse($html);
                 break;
-            case "html":
-                $html = htmlspecialchars($_POST["rich_edit_text"]);
-                break;
         }
 
         $this->data->html = $html;

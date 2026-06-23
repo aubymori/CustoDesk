@@ -1,6 +1,7 @@
 {
     "require": {
         "twig/twig": "^3.22",
-        "vanilla/nbbc": "^3.0"
+        "vanilla/nbbc": "^3.0",
+        "league/commonmark": "^2.8"
     }
 }

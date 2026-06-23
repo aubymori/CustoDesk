@@ -69,6 +69,22 @@ button {
 
 /* Text styles */
 
+h1, h2 {
+	margin-bottom: 6px;
+
+	& + * {
+		margin-top: 6px;
+	}
+}
+
+h3 {
+	margin-bottom: 4px;
+
+	& + * {
+		margin-top: 4px;
+	}
+}
+
 code, pre {
 	background: #f1f1f1;
 	border: 1px solid #ccc;

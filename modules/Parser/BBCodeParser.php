@@ -45,6 +45,17 @@ class BBCodeParser
             "after_endtag" => "sns",
         ]);
 
+        // Make the u rule not use the deprecated <u> element.
+        $bbcode->addRule("u", [
+            "simple_start" => "<span style=\"text-decoration:underline\">",
+            "simple_end" => "</span>",
+            "class" => "inline",
+            "allow_in" => ["listitem", "block", "columns", "inline", "link"],
+            "plain_start" => "<u>",
+            "plain_end" => "</u>",
+            "allow_params" => false,
+        ]);
+
         return $bbcode->parse($source);
     }
 }
