@@ -1,0 +1,12 @@
+{% extends "core.twig" %}
+{% from "macros/common.twig" import card_begin %}
+{% from "macros/common.twig" import card_end %}
+
+{% block content %}
+
+{{ card_begin("Tables Updated") }}
+The database tables were updated.
+<br>
+<a href="/">Return to homepage</a>
+{{ card_end() }}
+{% endblock %}

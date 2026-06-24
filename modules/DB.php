@@ -12,14 +12,19 @@ class DB
     private const INIT_FILE = "include/init.sql";
     private const DB_FILE   = "custodesk.db";
 
+    public static function update(): void
+    {
+        $exec = file_get_contents(self::INIT_FILE);
+        self::$db->exec($exec);
+    }
+
     public static function init(): void
     {
         $shouldInit = !file_exists(self::DB_FILE);
         self::$db = new SQLite3(self::DB_FILE);
         if ($shouldInit)
         {
-            $exec = file_get_contents(self::INIT_FILE);
-            self::$db->exec($exec);
+            self::update();
         }
         register_shutdown_function(self::class . "::closeConnection");
     }

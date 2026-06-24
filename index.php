@@ -40,6 +40,7 @@ Controller::route([
         "/admin/setup" => Setup\SetupController::class,
         "/admin" => Admin\DashboardController::class,
         "/admin/invite_keys" => Admin\InviteKeysController::class,
+        "/admin/update_tables" => Admin\UpdateTablesController::class,
 
         /* Debug pages */
         "/debug/rich_edit" => Debug\RichEditController::class,
