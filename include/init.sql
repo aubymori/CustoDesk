@@ -10,7 +10,7 @@ CREATE TABLE users (
     username CHAR(20),
     password TEXT,
     created_at INTEGER,
-    role TEXT DEFAULT "Member"
+    role INTEGER NOT NULL DEFAULT 0
 );
 
 CREATE TABLE sessions(

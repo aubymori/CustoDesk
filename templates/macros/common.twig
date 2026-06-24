@@ -12,7 +12,7 @@
 {% macro post(data) %}
 <div class="post clearfix">
     <a href="/post/1" class="postThumb">
-        <img src="{{ custodesk.vfl.resolveImage("post-thumb") }}">
+        <img src="{{ custodesk.vfl.resolveImage("postThumb") }}">
     </a>
     <div class="postDetails">
         <div class="postType">Wallpaper</div>
@@ -44,7 +44,7 @@
     </a>
     <div class="userDetails">
         <a href="/user/{{ data.id }}" class="userName">{{ data.username }}</a>
-        <div class="userRole">{{ data.role }}</div>
+        <div class="userRole">{{ data.role.toString() }}</div>
         <div class="userTime">Joined {{ custodesk.time.formatDate(data.createdAt) }}</div>
     </div>
 </div>

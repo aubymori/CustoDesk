@@ -11,7 +11,7 @@ class User
     public int $id;
     public string $avatarUrl;
     public int $createdAt;
-    public string $role;
+    public UserRole $role;
 
     public static function fromId(int $id): self
     {
@@ -25,10 +25,10 @@ class User
         {
             $new->username = $result->username;
             $new->createdAt = $result->created_at;
-            $new->role = $result->role;
+            $new->role = UserRole::from($result->role);
         }
 
-        $new->avatarUrl = VFL::getInstance()->resolveImage("user-icon");
+        $new->avatarUrl = VFL::getInstance()->resolveImage("userIcon");
 
         return $new;
     }

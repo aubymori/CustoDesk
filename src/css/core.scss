@@ -9,6 +9,10 @@ body {
     background-image: resolve-image("lines-top"), resolve-image("lines");
     background-repeat: repeat-x, repeat;
     background-position: top, top;
+
+	&.darkBg {
+		background-image: resolve-image("lines-top-dark"), resolve-image("lines-dark");
+	}
 }
 
 body, input, table, textarea {
@@ -121,11 +125,19 @@ code, pre {
 
 #headerArea {
 	color: #fff;
+
+	.darkBg & {
+		color: #000;
+	}
 }
 
 #headerLogo {
 	display: inline-block;
 	@include sprite("sprites", "logo");
+
+	.darkBg & {
+		@include sprite("sprites", "logo_i");
+	}
 }
 
 #linksBar {
@@ -137,10 +149,18 @@ code, pre {
 	vertical-align: top;
 	padding-top: 9px;
 
+	.darkBg & {
+		background: #fff;
+	}
+
     a {
         color: #fff;
         font-weight: bold;
         margin: 5px;
+
+		.darkBg & {
+			color: #000;
+		}
     }
 }
 
@@ -156,6 +176,10 @@ code, pre {
 	display: inline-block;
 	margin-left: 5px;
 	@include sprite("sprites", "account_menu_chevron");
+
+	.darkBg & {
+		@include sprite("sprites", "account_menu_chevron_i");
+	}
 }
 
 /* Base content styles */

@@ -1,35 +1,34 @@
 <?php
 namespace CustoDesk\Page\Common;
 
-enum UserRole : string
+enum UserRole : int
 {
-    case MEMBER = "Member";
-    case MOD = "Moderator";
-    case ADMIN = "Administrator";
-
-    /* Roles are hierarchical and stacking, so this makes the most sense for comparison. */
-    private function toOrdinal(): int
-    {
-        return match ($this)
-        {
-            self::MEMBER => 0,
-            self::MOD    => 1,
-            self::ADMIN  => 2,
-        };
-    }
+    case MEMBER = 0;
+    case MOD    = 1;
+    case ADMIN  = 2;
 
     public function isAtLeast(UserRole $other): bool
     {
-        return $this->toOrdinal() >= $other->toOrdinal();
+        return $this->value >= $other->value;
     }
 
     public function isAbove(UserRole $other): bool
     {
-        return $this->toOrdinal() > $other->toOrdinal();
+        return $this->value > $other->value;
     }
 
     public function isBelow(UserRole $other): bool
     {
-        return $this->toOrdinal() < $other->toOrdinal();
+        return $this->value < $other->value;
+    }
+
+    public function toString(): string
+    {
+        return match ($this)
+        {
+            self::MEMBER => "Member",
+            self::MOD    => "Moderator",
+            self::ADMIN  => "Administrator",
+        };
     }
 }

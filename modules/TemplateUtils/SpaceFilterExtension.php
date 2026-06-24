@@ -17,13 +17,14 @@ class SpaceFilterExtension extends AbstractExtension
         ];
     }
 
-    public function keepspaceFilter(string $value): string
+    public function keepspaceFilter(mixed $value): string
     {
         return self::MARKER_START . $value . self::MARKER_END;
     }
 
-    public function nospaceFilter(string $value): string
+    public function nospaceFilter(mixed $value): string
     {
+        $value = (string)$value;
         // 1. Extract every keepspace-marked region and replace it
         //    with a stable placeholder.
         $preserved = [];
