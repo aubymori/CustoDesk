@@ -24,12 +24,26 @@ class BBCodeParser
             "allow_in" => ["listitem", "block", "columns", "inline", "link"],
         ]);
 
+        // noparse rule
+        $bbcode->addRule("noparse", [
+            "mode" => BBCode::BBCODE_MODE_ENHANCED,
+            "template" => "{\$_content/v}",
+            "class" => "code",
+            "allow_in" => ["listitem", "block", "columns"],
+            "content" => BBCode::BBCODE_VERBATIM,
+            "after_tag" => "sn",
+            "before_endtag" => "sn",
+        ]);
+
         // Let's have an inline code rule.
         $bbcode->addRule("code", [
-            "simple_start" => "<code>",
-            "simple_end" => "</code>",
-            "class" => "inline",
-            "allow_in" => ["listitem", "block", "columns", "inline", "link"],
+            "mode" => BBCode::BBCODE_MODE_ENHANCED,
+            "template" => "<code>{\$_content/v}</code>",
+            "class" => "code",
+            "allow_in" => ["listitem", "block", "columns"],
+            "content" => BBCode::BBCODE_VERBATIM,
+            "after_tag" => "sn",
+            "before_endtag" => "sn",
         ]);
 
         // And one for formatted code.
@@ -39,10 +53,9 @@ class BBCodeParser
             "class" => "code",
             "allow_in" => ["listitem", "block", "columns"],
             "content" => BBCode::BBCODE_VERBATIM,
-            "before_tag" => "sns",
             "after_tag" => "sn",
             "before_endtag" => "sn",
-            "after_endtag" => "sns",
+            "after_endtag" => "sn",
         ]);
 
         // Make the u rule not use the deprecated <u> element.
