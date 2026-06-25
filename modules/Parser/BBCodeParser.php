@@ -56,6 +56,14 @@ class BBCodeParser
             "allow_params" => false,
         ]);
 
+        // Replace the rigid quote rule.
+        $bbcode->addRule("quote", [
+            "simple_start" => "<blockquote>",
+            "simple_end" => "</blockquote>",
+            "class" => "inline",
+            "allow_in" => ["listitem", "block", "columns", "inline", "link"],
+        ]);
+
         return $bbcode->parse($source);
     }
 }

@@ -114,6 +114,24 @@ code, pre {
 	}
 }
 
+blockquote {
+	margin: 0;
+	margin-left: 16px;
+	padding: 4px;
+	border-left: 2px solid #888;
+	background: #ddd;
+
+	p, h1, h2, h3 {
+		&:first-child {
+			margin-top: 0;
+		}
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+}
+
 /* Imports */
 
 @import "post";
@@ -253,10 +271,7 @@ code, pre {
 		& > p,
 		& > h1,
 		& > h2,
-		& > h3,
-		& > h4,
-		& > h5,
-		& > h6 {
+		& > h3 {
 			&:first-child {
 				margin-top: 0;
 			}

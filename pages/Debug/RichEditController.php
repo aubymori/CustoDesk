@@ -4,6 +4,8 @@ namespace CustoDesk\Page\Debug;
 use CustoDesk\Parser\BBCodeParser;
 use CustoDesk\Parser\MarkdownParser;
 use CustoDesk\RequestMetadata;
+use HTMLPurifier;
+use HTMLPurifier_Config;
 
 class RichEditController extends DebugPageController
 {
@@ -29,6 +31,11 @@ class RichEditController extends DebugPageController
                 $html = MarkdownParser::parse($html);
                 break;
         }
+
+        $config = HTMLPurifier_Config::createDefault();
+        $config->set("HTML.Allowed", "*[style],span[class],a[href],img[src|alt],p,h1,h2,h3,b,strong,i,em,u,strike,del,sup,subcode,pre,hr,ul,ol,li,br,blockquote");
+        $purifier = new HTMLPurifier($config);
+        $html = $purifier->purify($html);
 
         $this->data->html = $html;
         return true;
