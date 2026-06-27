@@ -15,7 +15,7 @@ body {
 	}
 }
 
-body, input, table, textarea {
+body, input, table, textarea, button {
 	font-family: Verdana, Geneva, Tahoma, sans-serif;
 	font-size: 11px;
 }
@@ -59,7 +59,7 @@ button {
 	&:hover {
 		background: #ddd;
 
-		&:active {
+		&:active, &.pushed {
 			background: #ccc;
 		}
 	}

@@ -38,4 +38,12 @@ class TemplateUtilsDelegate
     {
         return ServerConfig::isDebug();
     }
+
+    public function getRichEditChoice(): string
+    {
+        $cookie = @$_COOKIE["rich_edit_choice"] ?? "bbcode";
+        if (!in_array($cookie, ["bbcode", "markdown"], true))
+            return "bbcode";
+        return $cookie;
+    }
 }

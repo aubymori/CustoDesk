@@ -26,6 +26,38 @@
 @include format-sprite("italic");
 @include format-sprite("underline");
 @include format-sprite("strikethrough");
+@include format-sprite("color");
+@include format-sprite("h1");
+@include format-sprite("h2");
+@include format-sprite("h3");
+@include format-sprite("quote");
+@include format-sprite("code");
+@include format-sprite("pre");
+@include format-sprite("link");
+@include format-sprite("img");
+@include format-sprite("ul");
+@include format-sprite("ol");
+
+.richEditFormat-gap {
+    display: inline-block;
+    width: 4px;
+}
+
+.richEditForm {
+    background: #eee;
+    border: 1px solid #000;
+    border-top: 0;
+    padding: 4px;
+    display: none;
+
+    &.active {
+        display: block;
+    }
+}
+
+.richEditForm-insert {
+    font-weight: 700;
+}
 
 #richEditText {
     margin-top: 0;
@@ -35,5 +67,4 @@
     resize: vertical;
     font-family: monospace;
     font-size: 13px;
-    height: 150px;
 }

@@ -76,29 +76,57 @@
 {% endfor %}
 {% endmacro %}
 
-{% macro rich_edit(source) %}
+{% macro rich_edit_btn(id, title) %}
+<button id="richEditFormat-{{ id }}" title="{{ title }}"><div class="sprite"></div></button>
+{% endmacro %}
+
+{% macro rich_edit(height = 150) %}
 {{ custodesk.modules.add("richEdit") }}
 <div id="richEdit">
     <div id="richEditChoices">
-        <input type="radio" id="richEditChoice-bbcode" name="rich_edit_choice" value="bbcode">
+        {% if data.rich_edit_choice %}
+            {% set choice = data.rich_edit_choice %}
+        {% else %}
+            {% set choice = custodesk.getRichEditChoice() %}
+        {% endif %}
+        <input type="radio" id="richEditChoice-bbcode" name="rich_edit_choice" value="bbcode" {{ choice == "bbcode" ? "checked" }}>
         <label for="richEditChoice-bbcode">BBCode</label>
-        <input type="radio" id="richEditChoice-markdown" name="rich_edit_choice" value="markdown">
+        <input type="radio" id="richEditChoice-markdown" name="rich_edit_choice" value="markdown" {{ choice == "markdown" ? "checked" }}>
         <label for="richEditChoice-markdown">Markdown</label>
     </div>
     <div id="richEditFormats">
-        <button id="richEditFormat-bold" title="Bold">
-            <div class="sprite"></div>
-        </button>
-        <button id="richEditFormat-italic" title="Italic">
-            <div class="sprite"></div>
-        </button>
-        <button id="richEditFormat-underline" title="Underline">
-            <div class="sprite"></div>
-        </button>
-        <button id="richEditFormat-strikethrough" title="Strikethrough">
-            <div class="sprite"></div>
-        </button>
+        {{ _self.rich_edit_btn("bold", "Bold") }}
+        {{ _self.rich_edit_btn("italic", "Italic") }}
+        {{ _self.rich_edit_btn("underline", "Underline") }}
+        {{ _self.rich_edit_btn("strikethrough", "Strikethrough") }}
+        {{ _self.rich_edit_btn("color", "Text color") }}
+        <span class="richEditFormat-gap"></span>
+        {{ _self.rich_edit_btn("h1", "Header 1") }}
+        {{ _self.rich_edit_btn("h2", "Header 2") }}
+        {{ _self.rich_edit_btn("h3", "Header 3") }}
+        <span class="richEditFormat-gap"></span>
+        {{ _self.rich_edit_btn("quote", "Quote") }}
+        {{ _self.rich_edit_btn("code", "Inline code") }}
+        {{ _self.rich_edit_btn("pre", "Code") }}
+        {{ _self.rich_edit_btn("link", "Link") }}
+        {{ _self.rich_edit_btn("img", "Image") }}
+        <span class="richEditFormat-gap"></span>
+        {{ _self.rich_edit_btn("ul", "Bullet list") }}
+        {{ _self.rich_edit_btn("ol", "Numbered list") }}
     </div>
-    <textarea name="rich_edit_text" id="richEditText">{{ source }}</textarea>
+    <div id="richEditForm-color" class="richEditForm">
+        <table><tbody>
+            <tr>
+                <td><span>Color:</span></td>
+                <td><input type="text" id="richEditForm-colorInput"></td>
+                <td><button id="richEditForm-colorPick">Pick</button></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><button class="richEditForm-insert">Insert</button></td>
+            </tr>
+        </tbody></table>
+    </div>
+    <textarea name="rich_edit_text" id="richEditText" style="height:{{ height }}px">{{ data.rich_edit_source }}</textarea>
 </div>
 {% endmacro %}
