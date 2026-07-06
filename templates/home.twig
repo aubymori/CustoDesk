@@ -90,16 +90,6 @@
     </div>
     <a href="/post/1" id="newsLink">Read more &gt;&gt;</a>
 {{ card_end() }}
-
-{{ card_begin("Statistics") }}
-    <b>100</b> users registered<br>
-    <b>10</b> users registered today<br>
-    <b>1000</b> posts created<br>
-    <b>1</b> post created today
-    <br><br>
-    {% set now = custodesk.time.now() %}
-    It is currently <b>{{ custodesk.time.formatTime(now) }}</b> on <b>{{ custodesk.time.formatDate(now) }}</b>.
-{{ card_end() }}
 {% endblock %}
 
 {% block right_col_content %}
