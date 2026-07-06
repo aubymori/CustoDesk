@@ -15,6 +15,11 @@
                 <th width="40%">Created by</th>
                 <th width="40%">Used by</th>
             </tr>
+            {% if data.keys|length == 0 %}
+            <tr>
+                <td colspan="3"><center>No invite keys</center></td>
+            </tr>
+            {% else %}
             {% for key in data.keys %}
             <tr>
                 <td><code>{{ key.key }}</code></td>
@@ -30,6 +35,7 @@
                 </td>
             </tr>
             {% endfor %}
+            {% endif %}
         </tbody>
     </table>
 </div>

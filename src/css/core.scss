@@ -11,7 +11,7 @@ body {
     background-position: top, top;
 }
 
-body, input, table, textarea, button {
+body, input, table, textarea, button, select {
 	font-family: Verdana, Geneva, Tahoma, sans-serif;
 	font-size: 11px;
 }
@@ -149,6 +149,21 @@ blockquote {
 	}
 }
 
+td {
+	& > p,
+	& > h1,
+	& > h2,
+	& > h3 {
+		&:first-child {
+			margin-top: 0;
+		}
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+}
+
 /* Imports */
 
 @import "post";
@@ -270,6 +285,19 @@ blockquote {
 .alertText {
 	border: 1px solid #fff;
 	padding: 4px;
+
+	& > p,
+	& > h1,
+	& > h2,
+	& > h3 {
+		&:first-child {
+			margin-top: 0;
+		}
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
 }
 
 /* Card styles */

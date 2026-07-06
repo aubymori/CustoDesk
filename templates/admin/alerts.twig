@@ -1,0 +1,45 @@
+{% extends "admin/admin_page.twig" %}
+{% from "macros/common.twig" import card_begin, card_end, rich_edit %}
+
+{% block right_col_content %}
+<div class="tableCardWrapper"><table class="tableCard"><tbody>
+    <tbody>
+        <tr>
+            <th width="15%">Type</th>
+            <th width="40%">Text</th>
+            <th width="10%">Action</th>
+            <th width="35%">Created by</th>
+        </tr>
+        {% if data.dbAlerts|length == 0 %}
+        <tr>
+            <td colspan="4"><center>No alerts</center></td>
+        </tr>
+        {% else %}
+        {% for alert in data.dbAlerts %}
+        <tr>
+            <td>{{ alert.type }}</td>
+            <td>{{ alert.text|raw }}</td>
+            <td><a href="?delete={{ alert.id }}">Delete</a></td>
+            <td><a href="/user/{{ alert.creator_id }}">{{ custodesk.users.usernameFromId(alert.creator_id) }}</a> at {{ custodesk.time.formatDateTime(alert.created_at) }}</td>
+        </tr>
+        {% endfor %}
+        {% endif %}
+    </tbody>
+</tbody></table></div>
+{{ card_begin("Add Alert") }}
+    <form action="" method="post" class="clearfix">
+        <b>Type:</b>&nbsp;
+        <select name="type">
+            <option value="Normal">Normal</option>
+            <option value="Error">Error</option>
+            <option value="Warning">Warning</option>
+        </select>
+        <br><br>
+        <b>Text:</b>
+        <br>
+        {{ rich_edit() }}
+        <br>
+        <input type="submit" value="Add" style="float:right;font-weight:bold">
+    </form>
+{{ card_end() }}
+{% endblock %}

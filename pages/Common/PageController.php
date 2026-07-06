@@ -2,6 +2,7 @@
 namespace CustoDesk\Page\Common;
 
 use CustoDesk\Controller;
+use CustoDesk\DB;
 use CustoDesk\ErrorHandler;
 use CustoDesk\Page\Login\LoginController;
 use CustoDesk\Page\Register\RegisterController;
@@ -30,7 +31,7 @@ class PageController
         $this->redirect("/login?next=" . urlencode($_SERVER["REQUEST_URI"]));
     }
 
-    protected function addAlert(string $type, string $text, bool $raw = false): void
+    protected function addAlert(AlertType $type, string $text, bool $raw = false): void
     {
         if (!$raw)
             $text = htmlspecialchars($text);
@@ -68,6 +69,13 @@ class PageController
             http_response_code(429);
             $this->template = "rate_limit";
             $this->data->title = "Too Many Requests";
+        }
+
+        $alerts = DB::query("SELECT type, text FROM alerts");
+        foreach ($alerts as $alert)
+        {
+            $type = AlertType::tryFrom($alert->type) ?? AlertType::NORMAL;
+            $this->addAlert($type, $alert->text, true);
         }
         
         $this->data->errors = ErrorHandler::$errors;

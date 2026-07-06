@@ -29,3 +29,11 @@ CREATE TABLE IF NOT EXISTS invite_keys(
     user_id INTEGER,
     used_at INTEGER
 );
+
+CREATE TABLE IF NOT EXISTS alerts(
+    id INTEGER PRIMARY KEY NOT NULL,
+    text TEXT,
+    type TEXT,
+    creator_id INTEGER,
+    created_at INTEGER
+)

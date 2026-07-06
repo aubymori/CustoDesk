@@ -1,9 +1,9 @@
 <?php
 namespace CustoDesk\Page\Common;
 
-class AlertType
+enum AlertType : string
 {
-    const NORMAL = "";
-    const ERROR = "alertError";
-    const WARNING = "alertWarning";
+    case NORMAL  = "Normal";
+    case ERROR   = "Error";
+    case WARNING = "Warning";
 }

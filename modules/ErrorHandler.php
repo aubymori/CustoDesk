@@ -40,7 +40,7 @@ class ErrorHandler
         };
     }
 
-    private static function errorAlertType(int $type): string
+    private static function errorAlertType(int $type): AlertType
     {
         return match($type)
         {
