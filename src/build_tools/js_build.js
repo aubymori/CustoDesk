@@ -19,6 +19,7 @@ function build()
                         ],
                         targets: "firefox 3",
                         minified: true,
+                        comments: false,
                     }))
                     .pipe(vfl.gulp("s/jsbin"))
                     .pipe(gulp.dest("../../s/jsbin/"));

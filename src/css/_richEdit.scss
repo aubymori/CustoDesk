@@ -27,14 +27,21 @@
 @include format-sprite("underline");
 @include format-sprite("strikethrough");
 @include format-sprite("color");
+
+@include format-sprite("sub");
+@include format-sprite("sup");
+
 @include format-sprite("h1");
 @include format-sprite("h2");
 @include format-sprite("h3");
+
 @include format-sprite("quote");
+@include format-sprite("spoiler");
 @include format-sprite("code");
 @include format-sprite("pre");
 @include format-sprite("link");
 @include format-sprite("img");
+
 @include format-sprite("ul");
 @include format-sprite("ol");
 
