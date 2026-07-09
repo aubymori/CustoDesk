@@ -35,6 +35,7 @@ Controller::route([
         "/login" => Login\LoginController::class,
         "/register" => Register\RegisterController::class,
         "/cpanel" => ControlPanel\ControlPanelController::class,
+        "/user/*" => Profile\ProfileController::class,
 
         /* Admin pages */
         "/admin/setup" => Setup\SetupController::class,

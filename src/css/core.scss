@@ -48,8 +48,8 @@ button {
 	background: #eee;
 	border: 1px solid #000;
 	padding: 2px 4px;
-	@include box-sizing(content-box);
-	height: 13px;
+	@include box-sizing(border-box);
+	height: 19px;
 	line-height: 13px;
 
 	&:hover {

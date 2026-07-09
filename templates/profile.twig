@@ -1,0 +1,8 @@
+{% extends "two_col_page.twig" %}
+{% from "macros/common.twig" import card_begin, card_end, user %}
+
+{% block left_col_content %}
+{{ card_begin("Profile") }}
+    {{ user(data.user) }}
+{{ card_end() }}
+{% endblock %}
