@@ -23,12 +23,14 @@
             {% for key in data.keys %}
             <tr>
                 <td><code>{{ key.key }}</code></td>
+                {% set creatorName = custodesk.users.usernameFromId(key.creator_id) %}
                 <td>
-                    <a href="/user/{{ key.creator_id }}">{{ custodesk.users.usernameFromId(key.creator_id) }}</a> at {{ custodesk.time.formatDateTime(key.created_at) }}
+                    <a href="/user/{{ creatorName }}">{{ creatorName }}</a> at {{ custodesk.time.formatDateTime(key.created_at) }}
                 </td>
                 <td>
                     {% if key.user_id %}
-                    <a href="/user/{{ key.user_id }}">{{ custodesk.users.usernameFromId(key.user_id) }}</a> at {{ custodesk.time.formatDateTime(key.used_at) }}
+                    {% set username = custodesk.users.usernameFromId(key.user_id) %}
+                    <a href="/user/{{ username }}">{{ username }}</a> at {{ custodesk.time.formatDateTime(key.used_at) }}
                     {% else %}
                     Nobody. <a href="?revoke={{ key.key }}">Revoke</a>
                     {% endif %}

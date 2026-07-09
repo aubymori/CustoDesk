@@ -19,9 +19,9 @@
 				<a href="/search?type=post&amp;category=screenshot">Screenshots</a>
 				<div id="accountActions">
 					{% if custodesk.session.isLoggedIn() %}
-					<a href="/user/{{ custodesk.session.getUserId() }}" id="accountLink" onclick="custodesk.toggleMenu('accountMenu', event)">{{ custodesk.session.getUsername() }}</a>
+					<a href="/user/{{ custodesk.session.getUsername() }}" id="accountLink" onclick="custodesk.toggleMenu('accountMenu', event)">{{ custodesk.session.getUsername() }}</a>
 					<div id="accountMenu" class="menu">
-						<a href="/user/{{ custodesk.session.getUserId() }}">Profile</a>
+						<a href="/user/{{ custodesk.session.getUsername() }}">Profile</a>
 						<a href="/new">Create post</a>
 						<a href="/logout">Log out</a>
 					</div>

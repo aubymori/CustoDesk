@@ -15,7 +15,7 @@
     {{ user(data.user) }}
 {{ card_end() }}
 {{ card_begin("Actions") }}
-    <a href="/user/{{ custodesk.session.getUserId() }}" class="action">
+    <a href="/user/{{ custodesk.session.getUsername() }}" class="action">
         <div class="actionSprite profile"></div>
         <span class="actionText">View your profile</span>
     </a>
@@ -83,7 +83,7 @@
 
 {{ card_begin("News") }}
     <div id="newsTitle">Welcome to CustoDesk!</div>
-    <div id="newsAuthor">By: <a href="/user/1">aubymori</a></div>
+    <div id="newsAuthor">By: <a href="/user/aubymori">aubymori</a></div>
     <div id="newsTime">Posted: 1/1/1970 12:00 AM</div>
     <div id="newsText">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum maximus scelerisque nulla, egestas pretium nisl ornare non. Quisque sodales dignissim eros...

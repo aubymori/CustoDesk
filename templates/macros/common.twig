@@ -17,7 +17,7 @@
     <div class="postDetails">
         <div class="postType">Wallpaper</div>
         <a href="/post/1" class="postTitle">Example post</a>
-        <div class="postAuthor">By: <a href="/user/1">aubymori</a></div>
+        <div class="postAuthor">By: <a href="/user/aubymori">aubymori</a></div>
         <div class="postTags">
             Tags:
             <a href="/tag/hi">hi</a>,
@@ -39,11 +39,11 @@
 
 {% macro user(data) %}
 <div class="user clearfix">
-    <a href="/user/{{ data.id }}" class="userIcon">
+    <a href="/user/{{ data.username }}" class="userIcon">
         <img src="{{ data.avatarUrl }}">
     </a>
     <div class="userDetails">
-        <a href="/user/{{ data.id }}" class="userName">{{ data.username }}</a>
+        <a href="/user/{{ data.username }}" class="userName">{{ data.username }}</a>
         <div class="userRole">{{ data.role.toString() }}</div>
         <div class="userTime">Joined {{ custodesk.time.formatDate(data.createdAt) }}</div>
     </div>

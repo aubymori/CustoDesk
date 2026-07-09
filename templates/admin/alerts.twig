@@ -20,7 +20,8 @@
             <td>{{ alert.type }}</td>
             <td>{{ alert.text|raw }}</td>
             <td><a href="?delete={{ alert.id }}">Delete</a></td>
-            <td><a href="/user/{{ alert.creator_id }}">{{ custodesk.users.usernameFromId(alert.creator_id) }}</a> at {{ custodesk.time.formatDateTime(alert.created_at) }}</td>
+            {% set username = custodesk.users.usernameFromId(alert.creator_id) %}
+            <td><a href="/user/{{ username }}">{{ username }}</a> at {{ custodesk.time.formatDateTime(alert.created_at) }}</td>
         </tr>
         {% endfor %}
         {% endif %}
