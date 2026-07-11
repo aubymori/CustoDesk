@@ -42,7 +42,7 @@ class AlertsController extends AdminPageController
     public function onPost(RequestMetadata $request): bool
     {
         $text = RichTextProcessor::processRichText();
-        if ($text === false)
+        if (!$text->html)
         {
             $this->addAlert(AlertType::ERROR, "The alert must have text.");
             goto fail;

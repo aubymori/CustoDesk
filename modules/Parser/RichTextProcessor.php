@@ -8,14 +8,10 @@ use HTMLPurifier_Config;
 class RichTextProcessor
 {
     /* Returns FALSE for empty text. */
-    public static function processRichText(?object $data = null): object|false
+    public static function processRichText(?object $data = null): object
     {
         $html = trim($_POST["rich_edit_text"]);
-        $source = $html;
-        if (strlen($html) == 0)
-        {
-            return false;
-        }
+        $source = trim($html);
 
         if (@$_POST["rich_edit_choice"] == "markdown")
         {
@@ -43,8 +39,8 @@ class RichTextProcessor
 
         return (object)[
             "source" => $source,
-            "html" => $html,
-            "choice" => $choice
+            "html" => trim($html),
+            "editor" => $choice
         ];
     }
 }

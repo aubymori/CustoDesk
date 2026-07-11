@@ -1,0 +1,19 @@
+{% extends "two_col_page.twig" %}
+{% import "macros/core.twig" as core %}
+{% from "macros/common.twig" import card_begin, card_end, user, subnav %}
+
+{% block css %}
+{{ core.css("home") }}
+{% endblock %}
+
+{% block left_col_content %}
+{{ card_begin("You are logged in as") }}
+    {{ user(data.user) }}
+{{ card_end() }}
+{{ card_begin("User Control Panel") }}
+    {{ subnav([
+        [ "profile", "General",     "general",     "/cpanel" ],
+        [ "compose", "Edit Description", "description", "/cpanel/description" ],
+    ]) }}
+{{ card_end() }}
+{% endblock %}

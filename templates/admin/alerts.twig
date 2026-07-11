@@ -28,7 +28,7 @@
     </tbody>
 </tbody></table></div>
 {{ card_begin("Add Alert") }}
-    <form action="" method="post" class="clearfix">
+    <form action="" method="post">
         <b>Type:</b>&nbsp;
         <select name="type">
             <option value="Normal">Normal</option>
@@ -39,8 +39,9 @@
         <b>Text:</b>
         <br>
         {{ rich_edit() }}
-        <br>
-        <input type="submit" value="Add" style="float:right;font-weight:bold">
+        <div class="formButtons right">
+            <input type="submit" value="Add">
+        </div>
     </form>
 {{ card_end() }}
 {% endblock %}

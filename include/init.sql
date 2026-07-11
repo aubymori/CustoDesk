@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS rate_limits (
     allowance INTEGER
 );
 
-CREATE TABLE IF NOT EXISTS users (
+CREATE TABLE IF NOT EXISTS users(
     id INTEGER PRIMARY KEY NOT NULL,
     username CHAR(20),
     password TEXT,
@@ -36,4 +36,12 @@ CREATE TABLE IF NOT EXISTS alerts(
     type TEXT,
     creator_id INTEGER,
     created_at INTEGER
-)
+);
+
+CREATE TABLE IF NOT EXISTS user_descriptions(
+    user_id INTEGER PRIMARY KEY NOT NULL,
+    html TEXT,
+    source TEXT,
+    editor TEXT,
+    FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
+);

@@ -1,0 +1,14 @@
+{% extends "cpanel/base.twig" %}
+{% from "macros/common.twig" import card_begin, card_end, rich_edit %}
+
+{% block right_col_content %}
+{{ card_begin("Edit Description") }}
+<form action="" method="post">
+    {{ rich_edit(250) }}
+    <input type="hidden" name="action" value="edit_description">
+    <div class="formButtons right">
+        <input type="submit" value="Save">
+    </div>
+</form>
+{{ card_end() }}
+{% endblock %}

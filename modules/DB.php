@@ -22,6 +22,7 @@ class DB
     {
         $shouldInit = !file_exists(self::DB_FILE);
         self::$db = new SQLite3(self::DB_FILE);
+        self::$db->exec("PRAGMA foreign_keys = ON");
         if ($shouldInit)
         {
             self::update();

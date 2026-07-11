@@ -232,6 +232,10 @@ td {
 	}
 }
 
+#accountMenu {
+	margin-top: 7px;
+}
+
 /* Base content styles */
 
 #leftCol, #rightCol {
@@ -312,7 +316,7 @@ td {
 .cardContent {
 	padding: 5px;
 
-	&, & > center {
+	&, & > .userText, & > center {
 		& > p,
 		& > h1,
 		& > h2,
@@ -419,6 +423,8 @@ td {
 	display: none;
 	background: #fff;
 	border: 1px solid #000;
+	position: relative;
+	z-index: 100;
 	
 	&, a {
 		color: #000 !important;
@@ -433,5 +439,26 @@ td {
 	a {
 		display: block;
 		margin: 5px;
+	}
+}
+
+.formButtons {
+	margin-top: 5px;
+
+	input, button {
+		margin-right: 4px;
+	}
+
+	input[type="submit"] {
+		font-weight: bold;
+	}
+
+	&.right {
+		text-align: right;
+
+		input, button {
+			margin-right: 0;
+			margin-left: 4px;
+		}
 	}
 }

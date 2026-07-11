@@ -166,6 +166,6 @@
             </tr>
         </tbody></table>
     </div>
-    <textarea name="rich_edit_text" id="richEditText" style="height:{{ height }}px">{{ data.rich_edit_source }}</textarea>
+    <textarea name="rich_edit_text" id="richEditText" style="height:{{ height }}px">{{ data.rich_edit_source|keepspace }}</textarea>
 </div>
 {% endmacro %}

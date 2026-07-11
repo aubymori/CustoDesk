@@ -3,9 +3,11 @@
 
 {% block content %}
 {{ card_begin("Rich Edit Debug") }}
-    <form action="" method="post" class="clearfix">
+    <form action="" method="post">
         {{ rich_edit() }}
-        <input type="submit" value="Submit" style="font-weight: 700; float: right; margin-top: 2px;">
+        <div class="formButtons right">
+            <input type="submit" value="Submit">
+        </div>
     </form>
     <br>
     <b>Result:</b>

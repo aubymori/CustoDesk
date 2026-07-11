@@ -35,6 +35,7 @@ Controller::route([
         "/login" => Login\LoginController::class,
         "/register" => Register\RegisterController::class,
         "/cpanel" => ControlPanel\ControlPanelController::class,
+        "/cpanel/description" => ControlPanel\ControlPanelController::class,
         "/user/*" => Profile\ProfileController::class,
 
         /* Admin pages */
@@ -54,6 +55,8 @@ Controller::route([
         /* Regular pages */
         "/login" => Login\LoginController::class,
         "/register" => Register\RegisterController::class,
+        "/cpanel" => ControlPanel\ControlPanelController::class,
+        "/cpanel/description" => ControlPanel\ControlPanelController::class,
 
         /* Admin pages */
         "/admin/setup" => Setup\SetupController::class,
