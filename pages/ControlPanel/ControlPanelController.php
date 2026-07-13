@@ -64,8 +64,21 @@ class ControlPanelController extends PageController
         {
             case "upload_avatar":
             {
-                if (isset($_FILES["avatar"]) && $_FILES["avatar"]["error"] == 0)
+                if (isset($_FILES["avatar"]))
                 {
+                    if ($_FILES["avatar"]["error"] == UPLOAD_ERR_FORM_SIZE
+                    || $_FILES["avatar"]["error"] == UPLOAD_ERR_INI_SIZE
+                    || $_FILES["avatar"]["size"] > 10485760)
+                    {
+                        $this->addAlert(AlertType::ERROR, "The uploaded avatar is too big. It must be 10MB at most.");
+                        goto done;
+                    }
+                    else if ($_FILES["avatar"]["error"] != 0)
+                    {
+                        $this->addAlert(AlertType::ERROR, "There was an error uploading your avatar.");
+                        goto done;
+                    }
+
                     $tmpPath = $_FILES["avatar"]["tmp_name"];
                     try
                     {
@@ -118,11 +131,6 @@ class ControlPanelController extends PageController
                         $this->addAlert(AlertType::ERROR, "Failed to write the uploaded avatar.");
                         goto done;
                     }
-                }
-                else
-                {
-                    $this->addAlert(AlertType::ERROR, "No avatar was uploaded.");
-                    goto done;
                 }
                 break;   
             }
