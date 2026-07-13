@@ -45,3 +45,9 @@ CREATE TABLE IF NOT EXISTS user_descriptions(
     editor TEXT,
     FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
 );
+
+CREATE TABLE IF NOT EXISTS user_avatars(
+    user_id INTEGER PRIMARY KEY NOT NULL,
+    fname TEXT,
+    FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
+);

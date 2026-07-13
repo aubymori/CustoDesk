@@ -26,8 +26,7 @@ class User
         $new->username = $result->username;
         $new->createdAt = $result->created_at;
         $new->role = UserRole::from($result->role);
-
-        $new->avatarUrl = VFL::getInstance()->resolveImage("userIcon");
+        $new->avatarUrl = UserUtils::getAvatarUrl($id);
 
         return $new;
     }

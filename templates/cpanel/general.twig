@@ -1,8 +1,40 @@
 {% extends "cpanel/base.twig" %}
-{% from "macros/common.twig" import card_begin, card_end %}
+{% from "macros/common.twig" import card_begin, card_end, file_input %}
 
 {% block right_col_content %}
+{{ custodesk.modules.add("cpanel") }}
 {{ card_begin("General") }}
-
+    <span class="cpanelHeader">Avatar</span>
+    <form action="" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="action" value="upload_avatar">
+        <table cellspacing="0"><tbody>
+            <tr>
+                <td>
+                    <div class="userIcon">
+                        <img src="{{ data.user.avatarUrl }}" alt="{{ data.user.username }}">
+                    </div>
+                </td>
+                <td>
+                    {{ file_input("avatar", "image/png,image/jpeg,image/gif,image/webp") }}
+                    <p><b>Max size:</b> 10MB. Will be converted to a 64x64 PNG.</p>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <div class="formButtons">
+                        <input type="submit" value="Upload">
+                    </div>
+                </td>
+            </tr>
+        </tbody></table>
+    </form>
+    <p>Click the button below to remove your avatar, if you have one.</p>
+    <form action="" method="post">
+        <input type="hidden" name="action" value="remove_avatar">
+        <div class="formButtons">
+            <input type="submit" value="Remove Avatar">
+        </div>
+    </form>
 {{ card_end() }}
 {% endblock %}

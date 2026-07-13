@@ -8,6 +8,10 @@ use CustoDesk\Page\Common\User;
 use CustoDesk\Parser\RichTextProcessor;
 use CustoDesk\RequestMetadata;
 use CustoDesk\Session;
+use CustoDesk\Util\UserUtils;
+
+use function CustoDesk\rootpath;
+use Imagick;
 
 class ControlPanelController extends PageController
 {
@@ -30,24 +34,7 @@ class ControlPanelController extends PageController
                 {
                     $this->template = "cpanel/description";
                     $this->subpage = "description";
-                    break;
-                }
-            }
-        }
 
-        $this->data->user = User::fromId(Session::getUserId());
-    }
-
-    public function onGet(RequestMetadata $request): bool
-    {
-        $this->setUp($request);
-
-        if (isset($request->path[1]))
-        {
-            switch ($request->path[1])
-            {
-                case "description":
-                {
                     $result = DB::querySingle("SELECT source, editor FROM user_descriptions WHERE user_id=:id", [
                         "id" => Session::getUserId()
                     ]);
@@ -61,16 +48,87 @@ class ControlPanelController extends PageController
             }
         }
 
+        $this->data->user = User::fromId(Session::getUserId());
+    }
+
+    public function onGet(RequestMetadata $request): bool
+    {
+        $this->setUp($request);
         return true;
     }
 
     public function onPost(RequestMetadata $request): bool
     {
-        $this->setUp($request);
-
         $action = isset($_POST["action"]) ? $_POST["action"] : "";
         switch ($action)
         {
+            case "upload_avatar":
+            {
+                if (isset($_FILES["avatar"]) && $_FILES["avatar"]["error"] == 0)
+                {
+                    $tmpPath = $_FILES["avatar"]["tmp_name"];
+                    try
+                    {
+                        $im = new Imagick($tmpPath);
+                        $im2 = $im->coalesceImages();
+                        foreach ($im2 as $frame)
+                        {
+                            $im = $frame;
+                            break;
+                        }
+                    }
+                    catch (\Throwable $e)
+                    {
+                        $this->addAlert(AlertType::ERROR, "The uploaded avatar is not an image.");
+                        goto done;
+                    }
+
+
+                    $im->resizeImage(64, 64, Imagick::FILTER_LANCZOS, 0);
+                    $fname = md5(Session::getUserId() . "_" . md5($im, true));
+
+                    if ($im->writeImage(rootpath("user_avatars/$fname.png")))
+                    {
+                        // Remove old pfp and set new one
+                        $result = DB::querySingle("SELECT fname FROM user_avatars WHERE user_id=:id", [
+                            "id" => Session::getUserId()
+                        ]);
+                        if ($result != null)
+                        {
+                            if ($result->fname != $fname)
+                            {
+                                unlink(rootpath("user_avatars/{$result->fname}.png"));
+
+                                DB::exec("UPDATE user_avatars SET fname=:fname WHERE user_id=:id", [
+                                    "fname" => $fname,
+                                    "id" => Session::getUserId()
+                                ]);
+                            }
+                        }
+                        else
+                        {
+                            DB::exec("INSERT INTO user_avatars (user_id, fname) VALUES (:id, :fname)", [
+                                "id" => Session::getUserId(),
+                                "fname" => $fname
+                            ]);
+                        }
+                    }
+                    else
+                    {
+                        $this->addAlert(AlertType::ERROR, "Failed to write the uploaded avatar.");
+                        goto done;
+                    }
+                }
+                else
+                {
+                    $this->addAlert(AlertType::ERROR, "No avatar was uploaded.");
+                    goto done;
+                }
+                break;   
+            }
+            case "remove_avatar":
+                UserUtils::removeAvatar(Session::getUserId());
+                break;
             case "edit_description":
             {
                 $text = RichTextProcessor::processRichText($this->data);
@@ -78,6 +136,8 @@ class ControlPanelController extends PageController
                 if ($length > 10000)
                 {
                     $this->addAlert(AlertType::ERROR, "Your description contains $length characters. It must be 10000 characters at most.");
+                    // Return early instead of setting up. The description from the DB is all we set up
+                    // on this page and we'd rather keep the user input.
                     return true;
                 }
 
@@ -106,6 +166,8 @@ class ControlPanelController extends PageController
             }
         }
 
+done:
+        $this->setUp($request);
         return true;
     }
 }

@@ -47,6 +47,28 @@ document.addEventListener("click", function(e)
     {
         menu.classList.remove("open");
     }
+
+    if (e.target.className == "fileInputBtn")
+    {
+        let input = e.target.parentElement.querySelector("input");
+        if (input)
+        {
+            input.click();
+        }
+        e.preventDefault();
+    }
 }, false);
+
+document.addEventListener("input", function(e)
+{
+    if (e.target.type == "file" && e.target.parentElement.className == "fileInput")
+    {
+        let label = e.target.parentElement.querySelector(".fileInputLabel");
+        if (label)
+        {
+            label.innerText = e.target.files[0].name;
+        }
+    }
+});
 
 })();

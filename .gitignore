@@ -6,4 +6,7 @@
 /logs/
 /vfl.json
 /config.json
+/user_avatars/
+/user_bgs/
+/user_files/
 *.db

@@ -1,7 +1,7 @@
 RewriteEngine On
 
 # Allow static assets to go through:
-RewriteCond %{REQUEST_URI} ^/s/
+RewriteCond %{REQUEST_URI} ^/(s|user_avatars|user_bgs|user_files)/
 RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -f
 RewriteRule ^ - [L]
 

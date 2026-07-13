@@ -170,6 +170,7 @@ td {
 @import "user";
 @import "actions";
 @import "richEdit";
+@import "cpanel";
 
 /* Header styles */
 
@@ -461,4 +462,8 @@ td {
 			margin-left: 4px;
 		}
 	}
+}
+
+.fileInputLabel {
+	padding-left: 5px;
 }

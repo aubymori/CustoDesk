@@ -4,6 +4,9 @@ namespace CustoDesk\Util;
 use CustoDesk\ServerConfig;
 use CustoDesk\DB;
 use CustoDesk\Page\Common\UserRole;
+use CustoDesk\Session;
+use CustoDesk\TemplateUtils\VFL;
+use function CustoDesk\rootpath;
 
 class UserUtils
 {
@@ -62,5 +65,36 @@ class UserUtils
             return UserRole::MEMBER;
 
         return UserRole::from($result->role);
+    }
+
+    public static function getAvatarUrl(int $id): string
+    {
+        $result = DB::querySingle("SELECT fname FROM user_avatars WHERE user_id=:id", [
+            "id" => $id
+        ]);
+        if ($result)
+        {
+            return "/user_avatars/{$result->fname}.png";
+        }
+        return VFL::getInstance()->resolveImage("userIcon");
+    }
+
+    public static function removeAvatar(int $id): void
+    {
+        if (Session::getRole()->value < UserRole::MOD->value && $id != Session::getUserId())
+        {
+            return;   
+        }
+
+        $result = DB::querySingle("SELECT fname FROM user_avatars WHERE user_id=:id", [
+            "id" => $id
+        ]);
+        if ($result)
+        {
+            unlink(rootpath("user_avatars/{$result->fname}.png"));
+            DB::exec("DELETE from user_avatars WHERE user_id=:id", [
+                "id" => $id
+            ]);
+        }
     }
 }

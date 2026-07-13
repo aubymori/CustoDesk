@@ -9,6 +9,15 @@
 </div>
 {% endmacro %}
 
+{# Custom file input that has button styling. #}
+{% macro file_input(name, accept) %}
+<div class="fileInput">
+    <button id="fileInput-{{ name }}" class="fileInputBtn">Browse...</button>
+    <label class="fileInputLabel" for="fileInput-{{ name }}">No file selected.</label>
+    <input type="file" name="{{ name }}" accept="{{ accept }}" style="display:none">
+</div>
+{% endmacro %}
+
 {% macro post(data) %}
 <div class="post clearfix">
     <a href="/post/1" class="postThumb">
@@ -40,7 +49,7 @@
 {% macro user(data) %}
 <div class="user clearfix">
     <a href="/user/{{ data.username }}" class="userIcon">
-        <img src="{{ data.avatarUrl }}">
+        <img src="{{ data.avatarUrl }}" alt="{{ data.username }}">
     </a>
     <div class="userDetails">
         <a href="/user/{{ data.username }}" class="userName">{{ data.username }}</a>

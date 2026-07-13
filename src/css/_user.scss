@@ -8,17 +8,20 @@
 }
 
 .userIcon {
-	float: left;
 	margin-right: 6px;
     border: 1px dashed #000;
-    width: 62px;
-    height: 62px;
+    width: 64px;
+    height: 64px;
 
 	& > img {
-		width: 62px;
-		height: 62px;
+		width: 64px;
+		height: 64px;
         border: 0;
 	}
+
+    .user & {
+        float: left;
+    }
 }
 
 .userName {

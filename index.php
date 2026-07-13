@@ -13,11 +13,19 @@ use CustoDesk\DB;
 use CustoDesk\ServerConfig;
 use CustoDesk\ErrorHandler;
 use CustoDesk\Session;
+use function CustoDesk\rootpath;
 
 DB::init();
 ServerConfig::init();
 ErrorHandler::init();
 Session::init();
+
+if (!is_dir(rootpath("user_avatars")))
+    mkdir(rootpath("user_avatars"));
+if (!is_dir(rootpath("user_bgs")))
+    mkdir(rootpath("user_bgs"));
+if (!is_dir(rootpath("user_files")))
+    mkdir(rootpath("user_files"));
 
 Controller::redirect([
     "/logout" => function()
