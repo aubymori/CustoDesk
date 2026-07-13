@@ -5,8 +5,8 @@ use CustoDesk\Util\TimeUtils;
 
 class RateLimit
 {
-    private const MAX_REQUESTS = 200;
-    private const PERIOD = 600; // 10 minutes
+    private const MAX_REQUESTS = 60;
+    private const PERIOD = 60; // 1 minute
 
     private static function setExpireTime(string $ip, int $expire): void
     {
