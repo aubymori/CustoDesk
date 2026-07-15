@@ -85,6 +85,26 @@
 {% endfor %}
 {% endmacro %}
 
+{% macro follow_user_link(id, followed) %}
+{% if custodesk.session.isLoggedIn() %}
+<span class="followUserAction {{ followed ? 'following' }}">
+    <a href="#" class="action followUser" onclick="custodesk.followUser({{ id }}, this)">
+        <span class="actionSprite follow"></span>
+        <span class="actionText">Follow this user</span>
+    </a>
+    <a href="#" class="action unfollowUser" onclick="custodesk.unfollowUser({{ id }}, this)">
+        <span class="actionSprite unfollow"></span>
+        <span class="actionText">Unfollow this user</span>
+    </a>
+</span>
+{% else %}
+<a href="/login?next={{ custodesk.requestUri|url_encode }}" class="action">
+    <span class="actionSprite follow"></span>
+    <span class="actionText">Follow this user</span>
+</a>
+{% endif %}
+{% endmacro %}
+
 {% macro rich_edit_btn(id, title) %}
 <button id="richEditFormat-{{ id }}" title="{{ title }}"><div class="sprite"></div></button>
 {% endmacro %}

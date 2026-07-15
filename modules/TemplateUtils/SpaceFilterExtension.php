@@ -46,6 +46,6 @@ class SpaceFilterExtension extends AbstractExtension
             $result = \str_replace("\x00PRESERVED{$idx}\x00", $content, $result);
         }
 
-        return $result;
+        return trim($result);
     }
 }

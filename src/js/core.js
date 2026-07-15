@@ -30,6 +30,81 @@ custodesk.toggleMenu = function(id, event)
     event.stopPropagation();
 };
 
+/* Follow/unfollow */
+
+custodesk.followUser = function(id, link)
+{
+    custodesk.ajax("/ajax/follow_user", { id }, link, function()
+    {
+        link.parentElement.className += " following";
+    });
+};
+
+custodesk.unfollowUser = function(id, link)
+{
+    custodesk.ajax("/ajax/unfollow_user", { id }, link, function()
+    {
+        link.parentElement.className
+            = link.parentElement.className.replace(/ following$/, "");
+    });
+};
+
+custodesk.ajax = function(endpoint, data, element, onSuccess, onFailure)
+{
+    let origOnclick = null;
+    let origTabIndex = null;
+    if (element)
+    {
+        element.className += " pending";
+
+        origOnclick = element.onclick;
+        element.onclick = null;
+
+        origTabIndex = element.tabIndex;
+        element.tabIndex = -1;
+    }
+
+    let req = new XMLHttpRequest;
+    req.open("POST", endpoint);
+    req.setRequestHeader("Content-Type", "application/json");
+    req.onreadystatechange = function()
+    {
+        if (req.readyState == 4)
+        {
+            let json = JSON.parse(req.responseText);
+            if (req.status == 200)
+            {
+                onSuccess(json);
+            }
+            else
+            {
+                if (json.alerts)
+                {
+                    let alertHTML = "";
+                    for (const alert of json.alerts)
+                    {
+                        alertHTML += '<div class="alert alert' + alert.type + ' dismissible">';
+                        alertHTML += '<div class="alertText">' + alert.text + '</div>';
+                        alertHTML += '<button class="alertDismiss" title="Dismiss"></button>';
+                        alertHTML += '</div>';
+                    }
+                    document.getElementById("alerts").innerHTML += alertHTML;
+                }
+                onFailure(json);
+            }
+
+            if (element)
+            {
+                element.className = element.className.replace(/ pending$/, "");
+
+                element.onclick = origOnclick;
+                element.tabIndex = origTabIndex;
+            }
+        }
+    }
+    req.send(JSON.stringify(data));
+};
+
 (() => {
 
 /* Get and set timezone accordingly */
@@ -56,6 +131,10 @@ document.addEventListener("click", function(e)
             input.click();
         }
         e.preventDefault();
+    }
+    else if (e.target.className == "alertDismiss")
+    {
+        e.target.parentElement.remove();
     }
 }, false);
 

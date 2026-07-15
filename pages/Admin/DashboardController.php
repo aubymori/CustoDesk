@@ -15,7 +15,6 @@ class DashboardController extends AdminPageController
 
     public function onGet(RequestMetadata $request): bool
     {
-        $this->data->user = User::fromId(Session::getUserId());
         return true;
     }
 }

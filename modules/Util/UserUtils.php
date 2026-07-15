@@ -45,13 +45,13 @@ class UserUtils
         return $result->id;
     }
 
-    public static function usernameFromId(int $id): string
+    public static function usernameFromId(int $id): ?string
     {
         $result = DB::querySingle("SELECT username FROM users WHERE id=:id", [
             "id" => $id
         ]);
         if (!$result)
-            return "";
+            return null;
 
         return $result->username;
     }
@@ -96,5 +96,17 @@ class UserUtils
                 "id" => $id
             ]);
         }
+    }
+
+    public static function isFollowingUser(int $id): bool
+    {
+        if (!Session::isLoggedIn())
+            return false;
+
+        $result = DB::querySingle("SELECT id FROM followers WHERE from_id=:from_id AND to_id=:to_id", [
+            "from_id" => Session::getUserId(),
+            "to_id" => $id
+        ]);
+        return $result != null;
     }
 }

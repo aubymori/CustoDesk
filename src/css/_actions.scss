@@ -1,5 +1,5 @@
 .action {
-    display: block;
+    display: table;
     margin-bottom: 2px;
 
     &:last-child {
@@ -7,7 +7,7 @@
     }
 
     /* Underline on the anchor itself looks a bit odd; delegate it to the text. */
-    &:hover, &:focus {
+    &:hover {
         text-decoration: none;
 
         .actionText {
@@ -24,28 +24,51 @@
     }
 }
 
+@mixin action-sprite($type) {
+    &.#{$type} {
+        @include sprite("sprites", #{$type});
+    }
+}
+
 .actionSprite {
     display: inline-block;
     vertical-align: middle;
     margin-right: 4px;
 
-    &.profile {
-        @include sprite("sprites", "profile");
-    }
-
-    &.mail {
-        @include sprite("sprites", "mail");
-    }
-
-    &.cpanel {
-        @include sprite("sprites", "cpanel");
-    }
-
-    &.compose {
-        @include sprite("sprites", "compose");
-    }
+    @include action-sprite("profile");
+    @include action-sprite("mail");
+    @include action-sprite("cpanel");
+    @include action-sprite("compose");
+    @include action-sprite("follow");
+    @include action-sprite("unfollow");
 }
 
 .actionText {
     vertical-align: middle;
+}
+
+.followUserAction {
+    margin-bottom: 2px;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+
+    .action {
+        margin-bottom: 0;
+    }
+
+    .unfollowUser {
+        display: none;
+    }
+
+    &.following {
+        .followUser {
+            display: none;
+        }
+
+        .unfollowUser {
+            display: table;
+        }
+    }
 }

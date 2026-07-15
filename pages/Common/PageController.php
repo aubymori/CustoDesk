@@ -17,7 +17,7 @@ class PageController
     public string $title = "";
     public string $template = "404";
     public string $subpage = "";
-    protected object $data;
+    protected ?object $data = null;
     protected bool $dontEvenTry = false;
 
     protected function redirect(string $url): void
@@ -31,11 +31,11 @@ class PageController
         $this->redirect("/login?next=" . urlencode($_SERVER["REQUEST_URI"]));
     }
 
-    protected function addAlert(AlertType $type, string $text, bool $raw = false): void
+    protected function addAlert(AlertType $type, string $text, bool $raw = false, bool $dismissible = false): void
     {
         if (!$raw)
             $text = htmlspecialchars($text);
-        $this->data->alerts[] = new Alert($type, $text);
+        $this->data->alerts[] = new Alert($type, $text, $dismissible);
     }
 
     private function doRequest(RequestMetadata $request, string $method): void
@@ -49,7 +49,8 @@ class PageController
             }
         }
 
-        $this->data = (object)[];
+        if (!$this->data)
+            $this->data = (object)[];
         $this->data->alerts = [];
         if (RateLimit::check())
         {

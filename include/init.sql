@@ -51,3 +51,19 @@ CREATE TABLE IF NOT EXISTS user_avatars(
     fname TEXT,
     FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
 );
+
+CREATE TABLE IF NOT EXISTS user_follower_counts(
+    user_id INTEGER PRIMARY KEY NOT NULL,
+    followers_count INTEGER,
+    following_count INTEGER,
+    FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS followers(
+    id INTEGER PRIMARY KEY NOT NULL,
+    from_id INTEGER,
+    to_id INTEGER,
+    created_at INTEGER,
+    FOREIGN KEY(from_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY(to_id) REFERENCES users(id) ON DELETE CASCADE
+);

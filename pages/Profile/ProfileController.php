@@ -5,11 +5,14 @@ use CustoDesk\DB;
 use CustoDesk\Page\Common\PageController;
 use CustoDesk\Page\Common\User;
 use CustoDesk\RequestMetadata;
+use CustoDesk\Session;
+use CustoDesk\Util\UserUtils;
 
 class ProfileController extends PageController
 {
     public string $template = "profile/main";
     private int $userId;
+    private bool $isSelf;
 
     public function onGet(RequestMetadata $request): bool
     {
@@ -24,6 +27,10 @@ class ProfileController extends PageController
         $this->title = $user->username;
         
         $this->userId = $user->id;
+        $this->isSelf = Session::getUserId() == $this->userId;
+        $this->data->isSelf = $this->isSelf;
+        $this->data->isFollowing = UserUtils::isFollowingUser($this->userId);
+
         $this->doMainPage();
 
         return true;
@@ -37,6 +44,11 @@ class ProfileController extends PageController
         if ($result != null)
         {
             $this->data->description = $result->html;
+        }
+
+        if (!$this->isSelf)
+        {
+            $this->data->isFollowing = UserUtils::isFollowingUser($this->userId);
         }
     }
 }

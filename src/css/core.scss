@@ -20,7 +20,7 @@ a {
 	text-decoration: none;
 	color: #167ac6;
 
-	&:hover, &:focus {
+	&:hover {
 		text-decoration: underline;
 	}
 	
@@ -272,6 +272,7 @@ td {
 	border: 1px solid #000;
 	font-weight: 700;
 	margin-bottom: 6px;
+	position: relative;
 
 	&:last-child {
 		margin-bottom: 0;
@@ -302,6 +303,23 @@ td {
 		&:last-child {
 			margin-bottom: 0;
 		}
+	}
+}
+
+.alertDismiss {
+	float: right;
+	cursor: pointer;
+	border: 0;
+	padding: 0;
+	position: absolute;
+	top: 5px;
+	right: 4px;
+
+	@include sprite("sprites", "alert_dismiss", true);
+	
+
+	.alertWarning & {
+		@include sprite("sprites", "alert_dismiss_i");
 	}
 }
 
@@ -466,4 +484,9 @@ td {
 
 .fileInputLabel {
 	padding-left: 5px;
+}
+
+.pending {
+	opacity: .5;
+	pointer-events: none;
 }

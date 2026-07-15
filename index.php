@@ -66,6 +66,10 @@ Controller::route([
         "/cpanel" => ControlPanel\ControlPanelController::class,
         "/cpanel/description" => ControlPanel\ControlPanelController::class,
 
+        /* AJAX endpoints */
+        "/ajax/follow_user" => Ajax\FollowUserController::class,
+        "/ajax/unfollow_user" => Ajax\UnfollowUserController::class,
+
         /* Admin pages */
         "/admin/setup" => Setup\SetupController::class,
         "/admin/alerts" => Admin\AlertsController::class,

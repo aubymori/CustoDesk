@@ -19,9 +19,13 @@
 				<a href="/search?type=post&amp;category=screenshot">Screenshots</a>
 				<div id="accountActions">
 					{% if custodesk.session.isLoggedIn() %}
+					{% set UserRole = enum("CustoDesk\\Page\\Common\\UserRole") %}
 					<a href="/user/{{ custodesk.session.getUsername() }}" id="accountLink" onclick="custodesk.toggleMenu('accountMenu', event)">{{ custodesk.session.getUsername() }}</a>
 					<div id="accountMenu" class="menu">
 						<a href="/user/{{ custodesk.session.getUsername() }}">Profile</a>
+						{% if custodesk.session.getRole().isAtLeast(UserRole.MOD) %}
+						<a href="/admin">Admin Control Panel</a>
+						{% endif %}
 						<a href="/cpanel">User Control Panel</a>
 						<a href="/new">Create post</a>
 						<a href="/logout">Log out</a>
@@ -37,8 +41,11 @@
 
 		<div id="alerts">
 			{% for alert in data.alerts %}
-			<div class="alert alert{{ alert.type.value }}">
+			<div class="alert alert{{ alert.type.value }} dismissible">
 				<div class="alertText">{{ alert.text|raw }}</div>
+				{% if alert.dismissible %}
+				<button class="alertDismiss" title="Dismiss"></button>
+				{% endif %}
 			</div>
 			{% endfor %}
 			{% for error in data.errors %}
@@ -55,10 +62,7 @@
 			{% block content %}{% endblock %}
 		</div>
 
-		<div id="footer">
-			© 2026 CustoDesk. All rights reserved.<br>
-			Page rendered in {{ custodesk.getRenderTime() }} seconds
-		</div>
+		<div id="footer">&copy; 2026 CustoDesk. All rights reserved.<br>Page rendered in {{ custodesk.getRenderTime() }} seconds</div>
 
 		{{ core.js("core") }}
 		{% for module in custodesk.modules.get() %}

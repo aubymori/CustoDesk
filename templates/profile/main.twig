@@ -1,9 +1,16 @@
 {% extends "two_col_page.twig" %}
-{% from "macros/common.twig" import card_begin, card_end, user %}
+{% from "macros/common.twig" import card_begin, card_end, user, follow_user_link %}
 
 {% block left_col_content %}
 {{ card_begin("Profile") }}
     {{ user(data.user) }}
+{{ card_end() }}
+{{ card_begin("Actions") }}
+    {% if data.isSelf %}
+        
+    {% else %}
+        {{ follow_user_link(data.user.id, data.isFollowing) }}
+    {% endif %}
 {{ card_end() }}
 {% endblock %}
 

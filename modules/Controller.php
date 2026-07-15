@@ -24,7 +24,7 @@ class Controller
 
     public static function __initStatic()
     {
-        self::$twigLoader = new \Twig\Loader\FilesystemLoader("templates");
+        self::$twigLoader = new \Twig\Loader\FilesystemLoader(rootpath("templates"));
         self::$twig = new \Twig\Environment(self::$twigLoader, [
             "cache" => rootpath("cache/templates"),
             "auto_reload" => true,

@@ -1,6 +1,7 @@
 <?php
 namespace CustoDesk\TemplateUtils;
 
+use CustoDesk\Page\Common\UserRole;
 use CustoDesk\Session;
 
 class SessionDelegate
@@ -18,5 +19,10 @@ class SessionDelegate
     public function getUsername(): string
     {
         return Session::getUsername();
+    }
+
+    public function getRole(): UserRole
+    {
+        return Session::getRole();
     }
 }

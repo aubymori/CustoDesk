@@ -11,7 +11,7 @@ class UserUtilsDelegate
         return UserUtils::idFromUsername($username);
     }
 
-    public function usernameFromId(int $id): string
+    public function usernameFromId(int $id): ?string
     {
         return UserUtils::usernameFromId($id);
     }

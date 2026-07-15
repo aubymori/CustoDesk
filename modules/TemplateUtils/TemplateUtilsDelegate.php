@@ -6,6 +6,8 @@ use CustoDesk\Session;
 
 class TemplateUtilsDelegate
 {
+    public string $requestUri;
+
     public VFL $vfl;
     public TimeUtilsDelegate $time;
     public SessionDelegate $session;
@@ -14,6 +16,8 @@ class TemplateUtilsDelegate
 
     public function __construct()
     {
+        $this->requestUri = $_SERVER["REQUEST_URI"];
+
         $this->vfl = VFL::getInstance();
         $this->time = new TimeUtilsDelegate();
         $this->session = new SessionDelegate();
