@@ -109,4 +109,60 @@ class UserUtils
         ]);
         return $result != null;
     }
+
+    public static function updateFollowerCounts(int $id, bool $updateFollowers = false, bool $updateFollowing = false): void
+    {
+        if (!$updateFollowers && !$updateFollowing)
+            return;
+
+        $result = DB::querySingle("SELECT user_id FROM user_follower_counts WHERE user_id=:id", [
+            "id" => $id
+        ]);
+        $needInit = ($result == null);
+
+        if ($needInit || $updateFollowers)
+        {
+            $followers = DB::query("SELECT from_id FROM followers WHERE to_id=:id", [
+                "id" => $id
+            ]);
+            $followerCount = count($followers);
+        }
+
+        if ($needInit || $updateFollowing)
+        {
+            $following = DB::query("SELECT to_id FROM followers WHERE from_id=:id", [
+                "id" => $id
+            ]);        
+            $followingCount = count($following);
+        }
+
+        if ($needInit)
+        {
+            DB::exec("INSERT INTO user_follower_counts (user_id, followers_count, following_count) VALUES (:id, :followers, :following)", [
+                "id" => $id,
+                "followers" => $followerCount,
+                "following" => $followingCount
+            ]);
+        }
+        else
+        {
+            $args = [ "id" => $id ];
+            $query = "UPDATE user_follower_counts SET ";
+            if ($updateFollowers)
+            {
+                $query .= "followers_count=:followers";
+                $args += [ "followers" => $followerCount ];
+            }
+            if ($updateFollowing)
+            {
+                if ($updateFollowers)
+                    $query .= ",";
+                $query .= "following_count=:following";
+                $args += [ "following" => $followingCount ];
+            }
+            $query .= " WHERE user_id=:id";
+
+            DB::exec($query, $args);
+        }
+    }
 }

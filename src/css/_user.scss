@@ -8,19 +8,48 @@
 }
 
 .userIcon {
-	margin-right: 6px;
     border: 1px dashed #000;
-    width: 64px;
-    height: 64px;
+
+    .user & {
+        margin-right: 6px;
+    }
+
+    &, & > img {
+        width: 64px;
+		height: 64px;
+    }
 
 	& > img {
-		width: 64px;
-		height: 64px;
         border: 0;
 	}
 
     .user & {
         float: left;
+    }
+
+    &.small {
+        &, & > img {
+            width: 48px;
+            height: 48px;
+        }
+    }
+
+    &.grid {
+        display: inline-block;
+        margin-bottom: 5px;
+        
+        &.lastRow {
+            margin-bottom: 0;
+        }
+    }
+
+    // Hack for the followers card...
+    &.first, &.third {
+        margin-right: 5px;
+    }
+
+    &.second {
+        margin-right: 4px;
     }
 }
 

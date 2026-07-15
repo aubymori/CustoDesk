@@ -12,6 +12,40 @@
         {{ follow_user_link(data.user.id, data.isFollowing) }}
     {% endif %}
 {{ card_end() }}
+{% if data.followerCount > 0 %}
+    {{ card_begin("Followers (" ~ data.followerCount ~ ")") }}
+        {% for follower in data.followers %}
+            <a href="/user/{{ follower.username }}" class="{{ [
+                'userIcon',
+                'small',
+                'grid',
+                ((loop.index % 4) == 1) ? 'first' : '',
+                ((loop.index % 4) == 2) ? 'second' : '',
+                ((loop.index % 4) == 3) ? 'third' : '',
+                (loop.index >= (loop.length - 3)) ? 'lastRow' : '',
+            ]|join(' ') }}" title="{{ follower.username }}">
+                <img src="{{ follower.avatarUrl }}" alt="{{ follower.username }}">
+            </a>
+        {% endfor %}
+    {{ card_end() }}
+{% endif %}
+{% if data.followingCount > 0 %}
+    {{ card_begin("Following (" ~ data.followingCount ~ ")") }}
+        {% for follower in data.following %}
+            <a href="/user/{{ follower.username }}" class="{{ [
+                'userIcon',
+                'small',
+                'grid',
+                ((loop.index % 4) == 1) ? 'first' : '',
+                ((loop.index % 4) == 2) ? 'second' : '',
+                ((loop.index % 4) == 3) ? 'third' : '',
+                (loop.index >= (loop.length - 3)) ? 'lastRow' : '',
+            ]|join(' ') }}" title="{{ follower.username }}">
+                <img src="{{ follower.avatarUrl }}" alt="{{ follower.username }}">
+            </a>
+        {% endfor %}
+    {{ card_end() }}
+{% endif %}
 {% endblock %}
 
 {% block right_col_content %}

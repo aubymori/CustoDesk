@@ -41,6 +41,9 @@ class UnfollowUserController extends AjaxController
             "to_id" => $data->id
         ]);
 
+        UserUtils::updateFollowerCounts($data->id, updateFollowers: true);
+        UserUtils::updateFollowerCounts(Session::getUserId(), updateFollowing: true);
+        
         return true;
     }
 }

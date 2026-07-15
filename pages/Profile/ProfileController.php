@@ -50,5 +50,22 @@ class ProfileController extends PageController
         {
             $this->data->isFollowing = UserUtils::isFollowingUser($this->userId);
         }
+
+        $followerIDs = DB::query("SELECT from_id FROM followers WHERE to_id=:id ORDER BY created_at DESC LIMIT 8", [
+            "id" => $this->userId
+        ]);
+        $this->data->followers = User::fromIds(array_map(fn($i) => $i->from_id, $followerIDs), true);
+
+        $followingIDs = DB::query("SELECT to_id FROM followers WHERE from_id=:id ORDER BY created_at DESC LIMIT 8", [
+            "id" => $this->userId
+        ]);
+        $this->data->following = User::fromIds(array_map(fn($i) => $i->to_id, $followingIDs), true);
+
+        $followerCounts = DB::querySingle("SELECT followers_count, following_count FROM user_follower_counts WHERE user_id=:id", [
+            "id" => $this->userId
+        ]);
+
+        $this->data->followerCount = $followerCounts->followers_count;
+        $this->data->followingCount = $followerCounts->following_count;
     }
 }

@@ -48,6 +48,9 @@ class FollowUserController extends AjaxController
             "created_at" => TimeUtils::now()
         ]);
 
+        UserUtils::updateFollowerCounts($data->id, updateFollowers: true);
+        UserUtils::updateFollowerCounts(Session::getUserId(), updateFollowing: true);
+
         return true;
     }
 }
