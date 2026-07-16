@@ -36,7 +36,7 @@ custodesk.followUser = function(id, link)
 {
     custodesk.ajax("/ajax/follow_user", { id }, link, function()
     {
-        link.parentElement.className += " following";
+        link.parentNode.className += " following";
     });
 };
 
@@ -44,8 +44,8 @@ custodesk.unfollowUser = function(id, link)
 {
     custodesk.ajax("/ajax/unfollow_user", { id }, link, function()
     {
-        link.parentElement.className
-            = link.parentElement.className.replace(/ following$/, "");
+        link.parentNode.className
+            = link.parentNode.className.replace(/ following$/, "");
     });
 };
 
@@ -125,7 +125,7 @@ document.addEventListener("click", function(e)
 
     if (e.target.className == "fileInputBtn")
     {
-        let input = e.target.parentElement.querySelector("input");
+        let input = e.target.parentNode.querySelector("input");
         if (input)
         {
             input.click();
@@ -134,20 +134,20 @@ document.addEventListener("click", function(e)
     }
     else if (e.target.className == "alertDismiss")
     {
-        e.target.parentElement.remove();
+        e.target.parentNode.remove();
     }
 }, false);
 
 document.addEventListener("input", function(e)
 {
-    if (e.target.type == "file" && e.target.parentElement.className == "fileInput")
+    if (e.target.type == "file" && e.target.parentNode.className == "fileInput")
     {
-        let label = e.target.parentElement.querySelector(".fileInputLabel");
+        let label = e.target.parentNode.querySelector(".fileInputLabel");
         if (label)
         {
             label.innerText = e.target.files[0].name;
         }
     }
-});
+}, false);
 
 })();

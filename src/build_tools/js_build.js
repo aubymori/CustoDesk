@@ -4,7 +4,7 @@ const GulpBabel              = require("gulp-babel");
 const path                   = require("path");
 const vfl                    = require("./vfl");
 
-function build()
+function build(debug)
 {
     let stream = gulp.src("../js/[^_]*.js")
                     .pipe(GulpPreprocess({
@@ -18,8 +18,8 @@ function build()
                             } ]
                         ],
                         targets: "firefox 3",
-                        minified: true,
-                        comments: false,
+                        minified: !debug,
+                        comments: debug,
                     }))
                     .pipe(vfl.gulp("s/jsbin"))
                     .pipe(gulp.dest("../../s/jsbin/"));

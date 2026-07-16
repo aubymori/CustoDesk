@@ -15,27 +15,10 @@ const PARTS = {
     js: JSBuild
 };
 
-let g_parts = [];
+const DEBUG = process.argv[2].toLowerCase() == "debug";
 
-for (let i = 2; i < process.argv.length; i++)
-{
-    if (!(argv[i] in PARTS))
-    {
-        console.log("Invalid part: " + process.argv[i]);
-        console.log("Valid parts: " + Object.keys(PARTS).join(", "));
-        return;
-    }
-
-    g_parts.push();
-}
-
-if (g_parts.length == 0)
-{
-    g_parts = Object.keys(PARTS);
-}
-
-for (const part of g_parts)
+for (const part in PARTS)
 {
     console.log(`Building '${part}'...`);
-    PARTS[part]();
+    PARTS[part](DEBUG);
 }

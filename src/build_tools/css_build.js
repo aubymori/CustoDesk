@@ -16,7 +16,7 @@ function buildInternal()
     return stream;
 }
 
-function build()
+function build(debug)
 {
     gulp.series(
         ImgBuild.buildImages,

@@ -334,6 +334,7 @@ function handleAction(name)
                 textArea.value.substring(start, end).trim() +
                 data.postfix;
             textArea.focus();
+            alert(document.queryCommandEnabled("insertText"));
             document.execCommand("insertText", false, replace);
             textArea.setSelectionRange(start + data.prefix.length, end + data.prefix.length, dir);
             break;
@@ -386,7 +387,7 @@ for (const action in richEditActions)
     btn.addEventListener("click", (e) => {
         handleAction(action);
         e.preventDefault();
-    });
+    }, false);
 }
 
 document.addEventListener("click", function(e)
@@ -433,7 +434,7 @@ document.addEventListener("click", function(e)
 
         e.preventDefault();
     }
-});
+}, false);
 
 document.addEventListener("keydown", function(e)
 {
@@ -465,7 +466,7 @@ document.addEventListener("keydown", function(e)
             }
         }
     }
-});
+}, false);
 
 /* Confirm exit */
 
@@ -474,19 +475,19 @@ let hasEdited = false;
 textArea.addEventListener("input", function()
 {
     hasEdited = true;
-});
+}, false);
 
 /* Don't confirm exit when it's from a form submit */
 document.addEventListener("submit", function(e)
 {
     hasEdited = false;
-});
+}, false);
 
 window.addEventListener("beforeunload", function(e)
 {
     if (hasEdited)
         e.preventDefault();
-});
+}, false);
 
 /* Specific code for specific buttons */
 
@@ -497,13 +498,13 @@ document.getElementById("richEditForm-colorPick").addEventListener("click", func
     picker.value = input.value;
     picker.click();
     e.preventDefault();
-});
+}, false);
 
 document.getElementById("richEditForm-pickedColor").addEventListener("input", function(e)
 {
     let picker = document.getElementById("richEditForm-pickedColor");
     let input = document.getElementById("richEditForm-colorColor");
     input.value = picker.value;
-});
+}, false);
 
 })();

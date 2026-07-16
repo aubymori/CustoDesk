@@ -10,4 +10,4 @@ document.querySelector("input[name=\"avatar\"]").addEventListener("input", funct
         };
         reader.readAsDataURL(file);
     }
-});
+}, false);

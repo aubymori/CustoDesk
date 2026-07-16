@@ -25,7 +25,7 @@
     </a>
     <div class="postDetails">
         <div class="postType">Wallpaper</div>
-        <a href="/post/1" class="postTitle">Example post</a>
+        <a href="/post/1" class="postTitle blueHover">Example post</a>
         <div class="postAuthor">By: <a href="/user/aubymori">aubymori</a></div>
         <div class="postTags">
             Tags:
@@ -52,7 +52,7 @@
         <img src="{{ data.avatarUrl }}" alt="{{ data.username }}">
     </a>
     <div class="userDetails">
-        <a href="/user/{{ data.username }}" class="userName">{{ data.username }}</a>
+        <a href="/user/{{ data.username }}" class="userName blueHover">{{ data.username }}</a>
         <div class="userRole">{{ data.role.toString() }}</div>
         <div class="userTime">Joined {{ custodesk.time.formatDate(data.createdAt) }}</div>
     </div>

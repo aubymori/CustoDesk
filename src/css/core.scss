@@ -27,6 +27,18 @@ a {
 	&:active {
 		color: #f00;
 	}
+
+	&.blueHover {
+		color: #000;
+
+		&:hover {
+			color: #167ac6;
+		}
+
+		&:active {
+			color: #f00;
+		}
+	}
 }
 
 input[type="text"],
