@@ -467,6 +467,27 @@ document.addEventListener("keydown", function(e)
     }
 });
 
+/* Confirm exit */
+
+let hasEdited = false;
+
+textArea.addEventListener("input", function()
+{
+    hasEdited = true;
+});
+
+/* Don't confirm exit when it's from a form submit */
+document.addEventListener("submit", function(e)
+{
+    hasEdited = false;
+});
+
+window.addEventListener("beforeunload", function(e)
+{
+    if (hasEdited)
+        e.preventDefault();
+});
+
 /* Specific code for specific buttons */
 
 document.getElementById("richEditForm-colorPick").addEventListener("click", function(e)

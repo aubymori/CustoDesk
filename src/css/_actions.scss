@@ -41,6 +41,7 @@
     @include action-sprite("compose");
     @include action-sprite("follow");
     @include action-sprite("unfollow");
+    @include action-sprite("paintbrush");
 }
 
 .actionText {

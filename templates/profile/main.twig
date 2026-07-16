@@ -7,7 +7,18 @@
 {{ card_end() }}
 {{ card_begin("Actions") }}
     {% if data.isSelf %}
-        
+        <a href="/cpanel" class="action">
+            <span class="actionSprite cpanel"></span>
+            <span class="actionText">Change your settings</span>
+        </a>
+        <a href="?edit=1" class="action">
+            <span class="actionSprite paintbrush"></span>
+            <span class="actionText">Edit your profile</span>
+        </a>
+        <a href="/cpanel/description" class="action">
+            <span class="actionSprite compose"></span>
+            <span class="actionText">Edit your description</span>
+        </a>
     {% else %}
         {{ follow_user_link(data.user.id, data.isFollowing) }}
     {% endif %}
