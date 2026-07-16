@@ -334,7 +334,6 @@ function handleAction(name)
                 textArea.value.substring(start, end).trim() +
                 data.postfix;
             textArea.focus();
-            alert(document.queryCommandEnabled("insertText"));
             document.execCommand("insertText", false, replace);
             textArea.setSelectionRange(start + data.prefix.length, end + data.prefix.length, dir);
             break;
