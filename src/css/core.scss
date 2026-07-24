@@ -1,10 +1,15 @@
 @import "images";
 @import "mixins";
 
+html, body {
+	height: 100%;
+}
+
 body {
 	width: 800px;
 	margin: auto;
-	margin-top: 20px;
+	padding-top: 20px;
+	@include box-sizing(border-box);
     background-color: #efefef;
     background-image: resolve-image("linesTop"), resolve-image("lines");
     background-repeat: repeat-x, repeat;
@@ -51,6 +56,10 @@ textarea {
 	&:focus-visible {
 		outline: 0;
 		border-color: #167ac6;
+	}
+
+	&.bad {
+		border-color: #f00;
 	}
 }
 
@@ -186,7 +195,6 @@ td {
 @import "user";
 @import "actions";
 @import "richEdit";
-@import "cpanel";
 
 /* Header styles */
 
@@ -382,6 +390,14 @@ td {
 		top: 0;
 		right: 0;
 	}
+
+	.lightCards & {
+		color: #000;
+
+		&::after {
+			@include sprite("sprites", "card_decoration_i");
+		}
+	}
 }
 
 .cardContent {
@@ -478,7 +494,7 @@ td {
 }
 
 .formButtons {
-	margin-top: 5px;
+	padding-top: 5px;
 
 	input, button {
 		margin-right: 4px;
@@ -498,6 +514,16 @@ td {
 	}
 }
 
+.buttonGroup {
+	.checkbox {
+		display: inline-block;
+	}
+
+	input, button, select, .checkbox {
+		margin-right: 4px;
+	}
+}
+
 .fileInputLabel {
 	padding-left: 5px;
 }
@@ -505,4 +531,57 @@ td {
 .pending {
 	opacity: .5;
 	pointer-events: none;
+	user-select: none;
+}
+
+.sectionHeader, .subHeader {
+    display: inline-block;
+    margin: 5px 0;
+
+	&:first-child, &.noTop {
+		margin-top: 0;
+	}
+
+	&.top {
+		margin-top: 5px;
+	}
+}
+
+.sectionHeader {
+	font-weight: bold;
+}
+
+.colorInput {
+	margin-bottom: 1px;
+}
+
+.colorPickerPreview {
+	padding: 0;
+	width: 25px;
+	height: 25px;
+	margin-right: 4px;
+	cursor: pointer;
+}
+
+.colorPickerInput {
+	width: 75px;
+}
+
+.checkbox {
+	& > input {
+		margin-left: 0;
+	}
+
+	& > input, & > label {
+		vertical-align: middle;
+	}
+	
+	&.noMargin input {
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+
+	&.topMargin {
+		margin-top: 5px;
+	}
 }

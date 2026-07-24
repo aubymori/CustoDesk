@@ -1,3 +1,5 @@
+(() => {
+
 document.querySelector("input[name=\"avatar\"]").addEventListener("input", function(e)
 {
     let file = e.target.files[0];
@@ -11,3 +13,5 @@ document.querySelector("input[name=\"avatar\"]").addEventListener("input", funct
         reader.readAsDataURL(file);
     }
 }, false);
+
+})();

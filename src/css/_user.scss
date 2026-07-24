@@ -10,7 +10,7 @@
 .userIcon {
     border: 1px dashed #000;
 
-    .user & {
+    .user &, table & {
         margin-right: 6px;
     }
 

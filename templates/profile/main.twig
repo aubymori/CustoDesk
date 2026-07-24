@@ -1,5 +1,98 @@
-{% extends "two_col_page.twig" %}
-{% from "macros/common.twig" import card_begin, card_end, user, follow_user_link %}
+{% extends "profile/base.twig" %}
+{% from "macros/common.twig" import card_begin, card_end, user, follow_user_link, color_input %}
+
+{% block above %}
+{% if data.editingProfile %}
+{{ custodesk.modules.add("editProfile") }}
+{{ card_begin("Edit Profile") }}
+    <form action="" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="action" value="edit_profile">
+
+        {% set useCardColor = (data.theme.cardColor != null) %}
+        <div class="checkbox noMargin">
+            <input type="checkbox" name="use_card_color" id="use_card_color" {{ useCardColor ? "checked" }}>
+            <label for="use_card_color">
+                <span class="sectionHeader">Card Color</span>
+            </label>
+        </div>
+
+        <div id="cardColorSection">
+            {{ color_input("card_color", useCardColor ? data.theme.cardColor : "#000000") }}
+        </div>
+
+        {% set useLinkColor = (data.theme.linkColor != null) %}
+        <div class="checkbox noMargin">
+            <input type="checkbox" name="use_link_color" id="use_link_color" {{ useLinkColor ? "checked" }}>
+            <label for="use_link_color">
+                <span class="sectionHeader top">Link Color</span>
+            </label>
+        </div>
+
+        <div id="linkColorSection">
+            {{ color_input("link_color", useLinkColor ? data.theme.linkColor : "#000000") }}
+        </div>
+        
+        {% set useBg = (data.theme.background != null) %}
+        <div class="checkbox noMargin">
+            <input type="checkbox" name="use_bg" id="use_bg" {{ useBg ? "checked" }}>
+            <label for="use_bg">
+                <span class="sectionHeader top">Background</span>
+            </label>
+        </div>
+
+
+        <div id="backgroundSection" data-bg-image="{{ data.theme.bgImage }}">
+            <span class="subHeader noTop">Color</span>
+            {{ color_input("bg_color", useBg ? data.theme.bgColor : "#000000") }}
+
+            <span class="subHeader">Image (max size: 5MB)</span>
+            <div class="buttonGroup">
+                <button id="profileEditor-pick">Pick</button>
+                <button id="profileEditor-remove">Remove</button>
+            </div>
+            <input type="file" name="bg_image" style="display:none">
+            <input type="hidden" name="remove_bg" value="0">
+
+            <div class="checkbox noMargin topMargin">
+                <input type="checkbox" name="bg_fixed" id="bg_fixed" {{ data.theme.bgFixed ? "checked" }}>
+                <label for="bg_fixed"><span class="subHeader">Fixed</span></label>
+            </div>
+
+            <span class="subHeader">Alignment</span>
+            <div class="buttonGroup">
+                <select name="bg_align_y">
+                    <option value="top"    {{ data.theme.bgAlignY == "top"    ? 'selected="selected"' }}>Top</option>
+                    <option value="bottom" {{ data.theme.bgAlignY == "bottom" ? 'selected="selected"' }}>Bottom</option>
+                    <option value="center" {{ data.theme.bgAlignY == "center" ? 'selected="selected"' }}>Center</option>
+                </select>
+                <select name="bg_align_x">
+                    <option value="left"  {{ data.theme.bgAlignX == "left"   ? 'selected="selected"' }}>Left</option>
+                    <option value="right" {{ data.theme.bgAlignX == "right"  ? 'selected="selected"' }}>Right</option>
+                    <option value="center"{{ data.theme.bgAlignX == "center" ? 'selected="selected"' }}>Center</option>
+                </select>
+            </div>
+
+            <span class="subHeader">Repeat</span>
+            <br>
+            <span class="buttonGroup">
+                <div class="checkbox noMargin">
+                    <input type="checkbox" name="bg_repeat_x" id="bg_repeat_x" {{ data.theme.bgRepeatX ? "checked" }}>
+                    <label for="bg_repeat_x">X</label>
+                </div>
+                <div class="checkbox noMargin">
+                    <input type="checkbox" name="bg_repeat_y" id="bg_repeat_y" {{ data.theme.bgRepeatY ? "checked" }}>
+                    <label for="bg_repeat_y">Y</label>
+                </div>
+            </span>
+        </div>
+
+        <div class="formButtons">
+            <input type="submit" value="Save">
+        </div>
+    </form>
+{{ card_end() }}
+{% endif %}
+{% endblock %}
 
 {% block left_col_content %}
 {{ card_begin("Profile") }}

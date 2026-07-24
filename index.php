@@ -65,6 +65,7 @@ Controller::route([
         "/register" => Register\RegisterController::class,
         "/cpanel" => ControlPanel\ControlPanelController::class,
         "/cpanel/description" => ControlPanel\ControlPanelController::class,
+        "/user/*" => Profile\ProfileController::class,
 
         /* AJAX endpoints */
         "/ajax/follow_user" => Ajax\FollowUserController::class,

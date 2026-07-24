@@ -38,6 +38,16 @@ class PageController
         $this->data->alerts[] = new Alert($type, $text, $dismissible);
     }
 
+    protected function getPostValue(string $name, string $default = ""): string
+    {
+        return isset($_POST[$name]) ? $_POST[$name] : $default;
+    }
+
+    protected function getCheckValue(string $name): bool
+    {
+        return isset($_POST[$name]) && ($_POST[$name] == "on");
+    }
+
     private function doRequest(RequestMetadata $request, string $method): void
     {
         if (!Session::isLoggedIn() && ServerConfig::requireInviteKeys())

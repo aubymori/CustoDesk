@@ -18,6 +18,21 @@
 </div>
 {% endmacro %}
 
+{# Custom color input with text #}
+{% macro color_input(name, color = "#000000") %}
+<table class="colorInput" cellspacing="0" cellpadding="0"><tbody>
+    <tr>
+        <td>
+            <button class="colorPickerPreview" style="background-color:{{ color }}"></button>
+        </td>
+        <td>
+            <input type="text" class="colorPickerInput" value="{{ color }}">
+            <input type="color" name="{{ name }}" style="display:none" value="{{ color }}">
+        </td>
+    </tr>
+</tbody></table>
+{% endmacro %}
+
 {% macro post(data) %}
 <div class="post clearfix">
     <a href="/post/1" class="postThumb">

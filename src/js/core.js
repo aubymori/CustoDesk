@@ -136,16 +136,44 @@ document.addEventListener("click", function(e)
     {
         e.target.parentNode.remove();
     }
+    else if (e.target.className == "colorPickerPreview")
+    {
+        e.target.parentNode.parentNode.querySelector("input[type=\"color\"]").click();
+        e.preventDefault();
+    }
 }, false);
 
 document.addEventListener("input", function(e)
 {
-    if (e.target.type == "file" && e.target.parentNode.className == "fileInput")
+    let i = e.target;
+    if (i.className.startsWith("colorPickerInput"))
     {
-        let label = e.target.parentNode.querySelector(".fileInputLabel");
+        if (i.value.match(/^#[0-9a-f]{6}$/i) === null)
+        {
+            if (i.className.indexOf(" bad") == -1)
+                i.className += " bad";
+        }
+        else
+        {
+            i.className = i.className.replace(/ bad$/, "");
+            i.parentNode.parentNode.querySelector(".colorPickerPreview").style.backgroundColor = i.value;
+
+            let colorInput = i.parentNode.querySelector("input[type=\"color\"]");
+            colorInput.value = i.value;
+            colorInput.dispatchEvent(new InputEvent("input"));
+        }
+    }
+    else if (i.type == "color" && i.parentNode.parentNode.parentNode.parentNode.className == "colorInput")
+    {
+        i.parentNode.querySelector(".colorPickerInput").value = i.value;
+        i.parentNode.parentNode.querySelector(".colorPickerPreview").style.backgroundColor = i.value;
+    }
+    else if (i.type == "file" && i.parentNode.className == "fileInput")
+    {
+        let label = i.parentNode.querySelector(".fileInputLabel");
         if (label)
         {
-            label.innerText = e.target.files[0].name;
+            label.innerText = i.files[0].name;
         }
     }
 }, false);

@@ -1,0 +1,27 @@
+{% extends "two_col_page.twig" %}
+
+{%- block body_class -%}
+{{ data.theme.lightCards ? "lightCards" }} {{ data.theme.darkBg ? "darkBg" }}
+{%- endblock -%}
+
+{% block css %}
+<style id="userTheme">
+{%- if data.theme.cardColor -%}
+.cardHeader {
+    background: {{ data.theme.cardColor }};
+}
+{%- endif -%}
+
+{%- if data.theme.linkColor -%}
+a, a.blueHover:hover {
+    color: {{ data.theme.linkColor }};
+}
+{%- endif -%}
+
+{%- if data.theme.background -%}
+body {
+    background: {{ data.theme.background }};
+}
+{%- endif -%}
+</style>
+{% endblock %}

@@ -18,9 +18,10 @@
 					</tr>
 				</tbody>
 			</table>
-			<input type="checkbox" name="remember" id="remember" {{ data.remember ? "checked" }}>
-			<label for="remember">Remember me</label>
-			<br>
+			<div class="checkbox">
+				<input type="checkbox" name="remember" id="remember" {{ data.remember ? "checked" }}>
+				<label for="remember">Remember me</label>
+			</div>
 			<input type="submit" value="Log in">
 		</form>
 		<p style="margin-bottom:4px">Don't have an account? <a href="/register">Create one!</a></p>

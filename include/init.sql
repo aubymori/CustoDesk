@@ -67,3 +67,15 @@ CREATE TABLE IF NOT EXISTS followers(
     FOREIGN KEY(from_id) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY(to_id) REFERENCES users(id) ON DELETE CASCADE
 );
+
+CREATE TABLE IF NOT EXISTS user_profiles(
+    user_id INTEGER PRIMARY KEY NOT NULL,
+    card_color CHAR(7),
+    link_color CHAR(7),
+    bg_color CHAR(7),
+    bg_image TEXT,
+    bg_fixed INTEGER,
+    bg_repeat INTEGER,
+    bg_align_x INTEGER,
+    bg_align_y INTEGER
+);
